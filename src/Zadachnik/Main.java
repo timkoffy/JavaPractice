@@ -242,6 +242,8 @@ public class Main {
 
         System.out.println();
 
+        // ====== 1.4.x ======
+
         // 1.4.1.
         Point p1 = new Point(3, 5);
         Point p2 = new Point(25, 6);
@@ -310,6 +312,8 @@ public class Main {
                 ));
 
         System.out.println();
+
+        // ====== 1.5.x ======
 
         // 1.5.1.
         System.out.println("1.5.1. Сущность Пистолет.");
