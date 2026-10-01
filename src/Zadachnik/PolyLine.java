@@ -37,15 +37,15 @@ public class PolyLine {
     }
 
     public Point getBegin() {
-        return new Point(points.getFirst());
+        return points.getFirst();
     }
 
     public Point getEnd() {
-        return new Point(points.getLast());
+        return points.getLast();
     }
 
     public Point getPoint(int idx) {
-        return new Point(points.get(idx));
+        return points.get(idx);
     }
 
     public void setPoint(int idx, int x, int y) {

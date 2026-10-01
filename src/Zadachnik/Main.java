@@ -372,5 +372,7 @@ public class Main {
         System.out.println(s1.getAvgGrade() + " " + s1.isExcellent());
         System.out.println(s2.getAvgGrade() + " " + s2.isExcellent());
         System.out.println(s3.getAvgGrade() + " " + s3.isExcellent());
+
+        // 1.5.7.
     }
 }
