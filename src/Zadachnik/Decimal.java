@@ -15,42 +15,75 @@ public class Decimal {
     }
 
     public Decimal add(Decimal operand) {
+        Decimal res = new Decimal(this);
+
         int tmp = operand.numerator;
 
-        tmp *= this.denominator;
+        tmp *= res.denominator;
 
-        this.numerator *= operand.denominator;
-        this.denominator *= operand.denominator;
+        res.numerator *= operand.denominator;
+        res.denominator *= operand.denominator;
 
-        this.numerator += tmp;
+        res.numerator += tmp;
 
         relax();
 
-        return this;
+        return res;
+    }
+
+    public Decimal add(int operand) {
+        return add(new Decimal(operand, 1));
     }
 
     public Decimal sub(Decimal operand) {
+        Decimal res = new Decimal(this);
+
         int tmp = operand.numerator;
 
-        tmp *= this.denominator;
+        tmp *= res.denominator;
 
-        this.numerator *= operand.denominator;
-        this.denominator *= operand.denominator;
+        res.numerator *= operand.denominator;
+        res.denominator *= operand.denominator;
 
-        this.numerator -= tmp;
+        res.numerator -= tmp;
 
         relax();
 
-        return this;
+        return res;
+    }
+
+    public Decimal sub(int operand) {
+        return sub(new Decimal(operand, 1));
     }
 
     public Decimal mul(Decimal operand) {
-        this.numerator *= operand.numerator;
-        this.denominator *= operand.denominator;
+        Decimal res = new Decimal(this);
 
-        relax();
+        res.numerator *= operand.numerator;
+        res.denominator *= operand.denominator;
 
-        return this;
+        res.relax();
+
+        return res;
+    }
+
+    public Decimal mul(int operand) {
+        return mul(new Decimal(operand, 1));
+    }
+
+    public Decimal div(Decimal operand) {
+        Decimal res = new Decimal(this);
+
+        res.numerator *= operand.denominator;
+        res.denominator *= operand.numerator;
+
+        res.relax();
+
+        return res;
+    }
+
+    public Decimal div(int operand) {
+        return div(new Decimal(operand, 1));
     }
 
     public void relax() {
@@ -60,7 +93,7 @@ public class Decimal {
         denominator /= gcd;
     }
 
-    private int computeGcd(int a, int b) {
+    static private int computeGcd(int a, int b) {
         while (a != 0 && b != 0) {
             if (a > b) {
                 a %= b;

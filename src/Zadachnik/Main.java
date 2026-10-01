@@ -360,10 +360,16 @@ public class Main {
         // 1.5.5.
         System.out.println("1.5.5. Сущность  Дробь.");
 
-        Decimal decimal1 = new Decimal(3, 4);
-        Decimal decimal2 = new Decimal(4, 2);
-        System.out.println(decimal1);
-        System.out.println(decimal1.sub(decimal2));
+        Decimal f1 = new Decimal(1, 3);
+        Decimal f2 = new Decimal(2, 3);
+        Decimal f3 = new Decimal(1, 2);
+
+        System.out.println(f1 + " * " + f2 + " = " + f1.mul(f2));
+
+        // 1/3 + 2/3 = 1
+        // 1 / 1/2 = 2
+        // 2 - 5 = -3
+        System.out.println(f1.add(f2).div(f3).sub(5));
 
         System.out.println();
 
