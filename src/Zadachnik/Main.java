@@ -163,7 +163,7 @@ public class Main {
 
         Student s1 = new Student("Вася", 3, 4, 5);
         Student s2 = new Student("Петя", s1.getGrades());
-        Student s3 = new Student("Андрей", s1.getGrades());
+        Student s3 = new Student("Андрей");
 
         System.out.println(s1);
         System.out.println(s2);
@@ -252,10 +252,8 @@ public class Main {
         System.out.println();
 
         // 1.4.3.
-//        PolyLine pl3 = new PolyLine();
         PolyLine pl4 = new PolyLine(p1, p2, p3);
 
-//        System.out.println(pl3);
         System.out.println(pl4);
 
         System.out.println();
@@ -368,7 +366,11 @@ public class Main {
         decimal1.relax();
         System.out.println(decimal1);
 
-
         System.out.println();
+
+        // 1.5.6.
+        System.out.println(s1.getAvgGrade());
+        System.out.println(s2.getAvgGrade());
+        System.out.println(s3.getAvgGrade());
     }
 }

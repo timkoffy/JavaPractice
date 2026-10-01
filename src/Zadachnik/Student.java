@@ -38,6 +38,19 @@ public class Student {
         grades.set(idx, grade);
     }
 
+    public double getAvgGrade() {
+        if (grades == null || grades.isEmpty()) {
+            return 0;
+        }
+
+        int sum = 0;
+        for (Integer grade : grades) {
+            sum += grade;
+        }
+
+        return (double) sum / grades.size();
+    }
+
     private void validateGrades(List<Integer> grades) {
         if (grades == null) {
             throw new IllegalArgumentException("Список оценок null");
