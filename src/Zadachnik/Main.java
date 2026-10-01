@@ -163,7 +163,7 @@ public class Main {
 
         Student s1 = new Student("Вася", 3, 4, 5);
         Student s2 = new Student("Петя", s1.getGrades());
-        Student s3 = new Student("Андрей");
+        Student s3 = new Student("Андрей", 5, 5, 5);
 
         System.out.println(s1);
         System.out.println(s2);
@@ -369,8 +369,8 @@ public class Main {
         System.out.println();
 
         // 1.5.6.
-        System.out.println(s1.getAvgGrade());
-        System.out.println(s2.getAvgGrade());
-        System.out.println(s3.getAvgGrade());
+        System.out.println(s1.getAvgGrade() + " " + s1.isExcellent());
+        System.out.println(s2.getAvgGrade() + " " + s2.isExcellent());
+        System.out.println(s3.getAvgGrade() + " " + s3.isExcellent());
     }
 }

@@ -24,7 +24,7 @@ public class Student {
     }
 
     public List<Integer> getGrades() {
-        return List.copyOf(grades);
+        return new ArrayList<>(grades);
     }
 
     public void setGrades(List<Integer> grades) {
@@ -49,6 +49,10 @@ public class Student {
         }
 
         return (double) sum / grades.size();
+    }
+
+    public boolean isExcellent() {
+        return getAvgGrade() == 5.0;
     }
 
     private void validateGrades(List<Integer> grades) {
