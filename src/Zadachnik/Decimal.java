@@ -9,14 +9,48 @@ public class Decimal {
         this.denominator = denominator;
     }
 
-    static public Decimal mul(Decimal a, Decimal b) {
-        Decimal res = new Decimal(
-                a.numerator * b.numerator,
-                a.denominator * b.denominator);
+    public Decimal(Decimal decimal) {
+        this.numerator = decimal.numerator;
+        this.denominator = decimal.denominator;
+    }
 
-        res.relax();
+    public Decimal add(Decimal operand) {
+        int tmp = operand.numerator;
 
-        return res;
+        tmp *= this.denominator;
+
+        this.numerator *= operand.denominator;
+        this.denominator *= operand.denominator;
+
+        this.numerator += tmp;
+
+        relax();
+
+        return this;
+    }
+
+    public Decimal sub(Decimal operand) {
+        int tmp = operand.numerator;
+
+        tmp *= this.denominator;
+
+        this.numerator *= operand.denominator;
+        this.denominator *= operand.denominator;
+
+        this.numerator -= tmp;
+
+        relax();
+
+        return this;
+    }
+
+    public Decimal mul(Decimal operand) {
+        this.numerator *= operand.numerator;
+        this.denominator *= operand.denominator;
+
+        relax();
+
+        return this;
     }
 
     public void relax() {

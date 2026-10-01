@@ -360,11 +360,10 @@ public class Main {
         // 1.5.5.
         System.out.println("1.5.5. Сущность  Дробь.");
 
-        Decimal decimal1 = new Decimal(40, 20);
+        Decimal decimal1 = new Decimal(3, 4);
+        Decimal decimal2 = new Decimal(4, 2);
         System.out.println(decimal1);
-
-        decimal1.relax();
-        System.out.println(decimal1);
+        System.out.println(decimal1.sub(decimal2));
 
         System.out.println();
 
