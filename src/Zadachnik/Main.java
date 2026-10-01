@@ -373,6 +373,21 @@ public class Main {
         System.out.println(s2.getAvgGrade() + " " + s2.isExcellent());
         System.out.println(s3.getAvgGrade() + " " + s3.isExcellent());
 
+        System.out.println();
+
         // 1.5.7.
+
+        // 1.5.8.
+        System.out.println("1.5.8. Сущность  Квадрат.");
+
+        Square sq1 = new Square(5,3,23);
+
+        PolyLine plFromSq1 = sq1.toPolyLine();
+        System.out.println(plFromSq1.length());
+
+        plFromSq1.setEnd(15,25);
+        System.out.println(plFromSq1.length());
+
+        System.out.println();
     }
 }

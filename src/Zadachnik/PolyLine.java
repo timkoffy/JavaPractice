@@ -36,20 +36,28 @@ public class PolyLine {
         setPoints(List.of(points));
     }
 
-    public Point getBegin() {
-        return points.getFirst();
-    }
-
-    public Point getEnd() {
-        return points.getLast();
-    }
-
     public Point getPoint(int idx) {
         return points.get(idx);
     }
 
+    public Point getBegin() {
+        return getPoint(points.size() - 1);
+    }
+
+    public Point getEnd() {
+        return getPoint(0);
+    }
+
     public void setPoint(int idx, int x, int y) {
-        this.points.get(idx).set(x, y);
+        points.get(idx).set(x, y);
+    }
+
+    public void setBegin(int x, int y) {
+        setPoint(0, x, y);
+    }
+
+    public void setEnd(int x, int y) {
+        setPoint(points.size() - 1, x, y);
     }
 
     public void addPoint(Point p) {
