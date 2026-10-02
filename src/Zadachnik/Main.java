@@ -142,13 +142,20 @@ public class Main {
         System.out.println();
 
         // 1.2.4.
-        Department d = new Department("IT");
+        Department d1 = new Department("IT");
+        Department d2 = new Department("HR");
 
-        Employee employee1 = new Employee("Петров", d);
-        Employee employee2 = new Employee("Козлов", d);
-        Employee employee3 = new Employee("Сидоров", d);
+        Employee employee1 = new Employee("Петров");
+        Employee employee2 = new Employee("Козлов");
+        Employee employee3 = new Employee("Сидоров");
 
-        d.setBoss(employee2);
+//        d.addEmployee(employee2);
+//        d.removeEmployee(employee3);
+//        d.addEmployee(employee3);
+//        d.removeEmployee(employee3);
+
+        employee1.setDepartment(d1);
+        employee1.setDepartment(d2);
 
         System.out.println(employee1);
         System.out.println(employee2);
@@ -238,7 +245,7 @@ public class Main {
         // 1.3.4.
         System.out.println("1.3.4. Список сотрудников отдела.");
 
-        System.out.println(d.getEmployees());
+//        System.out.println(d.getEmployes());
 
         System.out.println();
 

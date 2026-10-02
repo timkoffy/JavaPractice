@@ -8,14 +8,24 @@ public class Department {
 
     private String title;
     private Employee boss;
-    private List<Employee> employees;
+    private List<Employee> employes;
 
-    public Department(String title) {
+    public Department(String title, Employee boss) {
         if (title == null || title.isBlank()) {
             title = UNKNOWN_DEPARTMENT_TITLE;
         }
         this.title = title;
-        this.employees = new ArrayList<>();
+
+        this.employes = new ArrayList<>();
+
+        if (boss != null) {
+            this.boss = boss;
+            employes.add(boss);
+        }
+    }
+
+    public Department(String title) {
+        this(title, null);
     }
 
     public String getTitle() {
@@ -26,6 +36,9 @@ public class Department {
     }
 
     public void setTitle(String title) {
+        if (title == null || title.isBlank()) {
+            title = UNKNOWN_DEPARTMENT_TITLE;
+        }
         this.title = title;
     }
 
@@ -34,17 +47,42 @@ public class Department {
     }
 
     public void setBoss(Employee boss) {
+        if (employes.contains(boss)) {
+
+        }
         this.boss = boss;
     }
 
     public void addEmployee(Employee employee) {
-        if (employee == null) {
-            throw new IllegalArgumentException("Сотрудник не указан при попытке добавления в департамент");
+        if (employee == null || employes.contains(employee)) {
+            return;
         }
-        this.employees.addLast(employee);
+
+        Department prevDepartment = employee.getDepartment();
+        if (prevDepartment != null) {
+            prevDepartment.removeEmployee(employee);
+        }
+
+
+        employee.setDepartment(this);
+        employes.add(employee);
     }
 
-    public List<Employee> getEmployees() {
-        return new ArrayList<>(employees);
+    public void removeEmployee(Employee employee) {
+        if (employee == null) {
+            return;
+        }
+
+        if (employes.contains(employee)) {
+            if (boss == employee) {
+                boss = null;
+            }
+            employes.remove(employee);
+            employee.setDepartment(null);
+        }
+    }
+
+    public List<Employee> getEmployes() {
+        return new ArrayList<>(employes);
     }
 }
