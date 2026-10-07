@@ -142,26 +142,26 @@ public class Main {
         System.out.println();
 
         // 1.2.4.
-        Department d1 = new Department("IT");
-        Department d2 = new Department("HR");
-
-        Employee employee1 = new Employee("Петров");
-        Employee employee2 = new Employee("Козлов");
-        Employee employee3 = new Employee("Сидоров");
-
-//        d.addEmployee(employee2);
-//        d.removeEmployee(employee3);
-//        d.addEmployee(employee3);
-//        d.removeEmployee(employee3);
-
-        employee1.setDepartment(d1);
-        employee1.setDepartment(d2);
-
-        System.out.println(employee1);
-        System.out.println(employee2);
-        System.out.println(employee3);
-
-        System.out.println();
+//        Department d1 = new Department("IT");
+//        Department d2 = new Department("HR");
+//
+//        Employee employee1 = new Employee("Петров");
+//        Employee employee2 = new Employee("Козлов");
+//        Employee employee3 = new Employee("Сидоров");
+//
+////        d.addEmployee(employee2);
+////        d.removeEmployee(employee3);
+////        d.addEmployee(employee3);
+////        d.removeEmployee(employee3);
+//
+//        employee1.setDepartment(d1);
+//        employee1.setDepartment(d2);
+//
+//        System.out.println(employee1);
+//        System.out.println(employee2);
+//        System.out.println(employee3);
+//
+//        System.out.println();
 
         // ====== 1.3.x ======
 
@@ -341,8 +341,6 @@ public class Main {
 
         System.out.println();
 
-        // 1.5.3.
-
         // 1.5.4.
         System.out.println("1.5.4. Отец моего отца.");
 
@@ -373,12 +371,12 @@ public class Main {
 
         Decimal f1 = new Decimal(1, 3);
         Decimal f2 = new Decimal(2, 3);
-        Decimal f3 = new Decimal(1, 2);
+        Decimal f3 = new Decimal(1, -2);
 
         System.out.println(f1 + " * " + f2 + " = " + f1.mul(f2));
 
         // 1/3 + 2/3 = 1
-        // 1 / 1/2 = 2
+        // 1 / -1/2 = 2
         // 2 - 5 = -3
         System.out.println(f1.add(f2).div(f3).sub(5));
 
@@ -390,8 +388,6 @@ public class Main {
         System.out.println(s3.getAvgGrade() + " " + s3.isExcellent());
 
         System.out.println();
-
-        // 1.5.7.
 
         // 1.5.8.
         System.out.println("1.5.8. Сущность  Квадрат.");

@@ -5,6 +5,15 @@ public class Decimal {
     private int denominator;
 
     public Decimal(int numerator, int denominator) {
+        if (denominator == 0) {
+            throw new ArithmeticException("Знаменатель не может быть равен нулю");
+        }
+
+        if (denominator < 0) {
+            denominator = -denominator;
+            numerator = -numerator;
+        }
+
         this.numerator = numerator;
         this.denominator = denominator;
     }
@@ -76,6 +85,11 @@ public class Decimal {
 
         res.numerator *= operand.denominator;
         res.denominator *= operand.numerator;
+
+        if (res.denominator < 0) {
+            res.denominator = -res.denominator;
+            res.numerator = -res.numerator;
+        }
 
         res.relax();
 
