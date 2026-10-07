@@ -5,8 +5,7 @@ public class House {
 
     public House(int floorCount) {
         if (floorCount < 1) {
-            this.floorCount = 1;
-            return;
+            throw new IllegalArgumentException("Количество этажей дома должно быть больше 0");
         }
         this.floorCount = floorCount;
     }

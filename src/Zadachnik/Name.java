@@ -6,6 +6,12 @@ public class Name {
     private String middleName;
 
     public Name(String lastName, String firstName, String middleName) {
+        lastName = fixNullString(lastName);
+        firstName = fixNullString(firstName);
+        middleName = fixNullString(middleName);
+
+        ensureNotEmpty(lastName, firstName, middleName);
+
         this.lastName = lastName;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -16,6 +22,8 @@ public class Name {
     }
 
     public void setLastName(String lastName) {
+        lastName = fixNullString(lastName);
+        ensureNotEmpty(lastName, this.firstName, this.middleName);
         this.lastName = lastName;
     }
 
@@ -24,6 +32,8 @@ public class Name {
     }
 
     public void setFirstName(String firstName) {
+        firstName = fixNullString(firstName);
+        ensureNotEmpty(this.lastName, firstName, this.middleName);
         this.firstName = firstName;
     }
 
@@ -32,11 +42,26 @@ public class Name {
     }
 
     public void setMiddleName(String middleName) {
+        middleName = fixNullString(middleName);
+        ensureNotEmpty(this.lastName, this.firstName, middleName);
         this.middleName = middleName;
     }
 
     public boolean hasMiddleName() {
         return !middleName.isBlank();
+    }
+
+    private static String fixNullString(String s) {
+        if (s == null) {
+            return "";
+        }
+        return s.trim();
+    }
+
+    private static void ensureNotEmpty(String last, String first, String middle) {
+        if (last.isBlank() && first.isBlank() && middle.isBlank()) {
+            throw new IllegalArgumentException("Хотя бы одна часть имени должна быть непустой");
+        }
     }
 
     @Override
