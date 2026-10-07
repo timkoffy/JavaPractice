@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Town {
     private String title;
-    private List<Route> routes;
+    protected List<Route> routes;
 
     public Town(String title) {
         this(title, new ArrayList<>());

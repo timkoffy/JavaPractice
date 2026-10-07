@@ -402,9 +402,9 @@ public class Main {
         // ---
 
         // 1.6.9.
-        Town townA = new Town("A");
-        Town townB = new Town("B", new Route(townA), new Route(townA));
-        Town townC = new Town("C", new Route(townA),  new Route(townB));
+        BidirectionalTown townC = new BidirectionalTown("C");
+        BidirectionalTown townA = new BidirectionalTown("A");
+        BidirectionalTown townB = new BidirectionalTown("B", new Route(townA), new Route(townC));
 
         System.out.println(townA);
         System.out.println(townB);
