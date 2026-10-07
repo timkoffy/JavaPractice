@@ -83,6 +83,10 @@ public class Decimal {
     public Decimal div(Decimal operand) {
         Decimal res = new Decimal(this);
 
+        if (operand.numerator == 0) {
+            throw new ArithmeticException("Деление на ноль");
+        }
+
         res.numerator *= operand.denominator;
         res.denominator *= operand.numerator;
 
