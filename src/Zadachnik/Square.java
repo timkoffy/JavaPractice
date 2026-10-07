@@ -19,8 +19,16 @@ public class Square {
         this.sideLength = sideLength;
     }
 
-    // * *
-    // * *
+    public int getSideLength() {
+        return sideLength;
+    }
+
+    public void setSideLength(int sideLength) {
+        if (sideLength < 1) {
+            throw new IllegalArgumentException("Сторона квадрата должна быть хотя бы длиной 1");
+        }
+        this.sideLength = sideLength;
+    }
 
     public PolyLine toPolyLine() {
         return new PolyLine(
