@@ -404,14 +404,18 @@ public class Main {
         // 1.6.9.
 
         Town townA = new Town("A");
-        Town townB = new Town("B", new Route(townA));
+        Town townB = new Town("B", new Route(townA), new Route(townA));
         Town townC = new Town("C", new Route(townA),  new Route(townB));
 
         System.out.println(townA);
         System.out.println(townB);
         System.out.println(townC);
 
+        townB.addRoute(townA, 1);
 
+        System.out.println(townA);
+        System.out.println(townB);
+        System.out.println(townC);
 
     }
 }

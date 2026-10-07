@@ -16,7 +16,16 @@ public class Town {
             throw new IllegalArgumentException("Город должен быть с названием");
         }
         this.title = title;
-        this.routes = new ArrayList<>(routes);
+
+        this.routes = new ArrayList<>();
+        if (routes != null) {
+            for (Route route : routes) {
+                if (route == null || route.getTarget() == null) {
+                    throw new NullPointerException("Путь и город должны быть заданы");
+                }
+                this.addRoute(route.getTarget(), route.getCost());
+            }
+        }
     }
 
     public Town(String title, Route... routes) {
@@ -33,7 +42,7 @@ public class Town {
 
     public void addRoute(Town target, int cost) {
         if (target == null) {
-            throw new IllegalArgumentException("В пути не указан город назначения");
+            throw new NullPointerException("В пути не указан город назначения");
         }
 
         for (Route route : routes) {
@@ -48,7 +57,7 @@ public class Town {
 
     public void removeRoute(Town target) {
         if (target == null) {
-            throw new IllegalArgumentException("В пути не указан город назначения");
+            throw new NullPointerException("В пути не указан город назначения");
         }
 
         for (Route route : routes) {
