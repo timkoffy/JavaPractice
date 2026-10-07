@@ -1,4 +1,4 @@
-package Zadachnik;
+package zadachnik;
 
 public final class Decimal extends Number {
     private int numerator;

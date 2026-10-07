@@ -1,4 +1,4 @@
-package Zadachnik;
+package zadachnik;
 
 public class Gun extends Weapon {
     static private final int DEFAULT_MAX_BULLET_COUNT = 5;

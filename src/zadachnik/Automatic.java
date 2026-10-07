@@ -1,4 +1,4 @@
-package Zadachnik;
+package zadachnik;
 
 public class Automatic extends Gun {
     private final int rateOfFire;

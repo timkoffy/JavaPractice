@@ -1,4 +1,4 @@
-package Zadachnik;
+package zadachnik;
 
 public class Time {
     static private final int SECONDS_IN_HOUR = 3600;

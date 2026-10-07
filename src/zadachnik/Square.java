@@ -1,4 +1,4 @@
-package Zadachnik;
+package zadachnik;
 
 public class Square {
     private Point rootPoint;

@@ -1,4 +1,4 @@
-package Zadachnik;
+package zadachnik;
 
 public class Human {
     static private final int UNKNOWN_HEIGHT = -1;

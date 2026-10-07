@@ -1,4 +1,4 @@
-package Zadachnik;
+package zadachnik;
 
 public class Line {
     private Point begin;

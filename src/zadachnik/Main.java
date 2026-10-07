@@ -1,4 +1,4 @@
-package Zadachnik;
+package zadachnik;
 
 public class Main {
     public static void main(String[] args) {

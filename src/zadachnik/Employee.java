@@ -1,4 +1,4 @@
-package Zadachnik;
+package zadachnik;
 
 public class Employee {
     private String name;

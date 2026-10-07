@@ -1,4 +1,4 @@
-package Zadachnik;
+package zadachnik;
 
 public final class Point3D extends Point {
     private int z;

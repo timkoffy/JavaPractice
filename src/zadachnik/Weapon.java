@@ -1,4 +1,4 @@
-package Zadachnik;
+package zadachnik;
 
 abstract class Weapon {
     private int ammo;

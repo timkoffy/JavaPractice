@@ -1,4 +1,4 @@
-package Zadachnik;
+package zadachnik;
 
 import java.util.ArrayList;
 import java.util.List;
