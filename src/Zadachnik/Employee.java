@@ -1,5 +1,5 @@
 package Zadachnik;
-// 2.1 2.2. допилить отделы
+
 public class Employee {
     private String name;
     private Department department;
@@ -30,8 +30,8 @@ public class Employee {
             return;
         }
 
-        if (department.getEmployes().contains(this)) {
-            department.removeEmployee(this);
+        if (this.department == department) {
+            return;
         }
 
         department.addEmployee(this);

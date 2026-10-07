@@ -46,11 +46,11 @@ public class Department {
         return boss;
     }
 
-    public void setBoss(Employee boss) {
-        if (employes.contains(boss)) {
-
+    public void setBoss(Employee newBoss) {
+        if (!employes.contains(newBoss)) {
+            addEmployee(newBoss);
         }
-        this.boss = boss;
+        this.boss = newBoss;
     }
 
     public void addEmployee(Employee employee) {
@@ -63,9 +63,8 @@ public class Department {
             prevDepartment.removeEmployee(employee);
         }
 
-
-        employee.setDepartment(this);
         employes.add(employee);
+        employee.setDepartment(this);
     }
 
     public void removeEmployee(Employee employee) {
@@ -84,5 +83,12 @@ public class Department {
 
     public List<Employee> getEmployes() {
         return new ArrayList<>(employes);
+    }
+
+    @Override
+    public String toString() {
+        return "Отдел " + title +
+                ", босс = " + boss +
+                ", сотрудники " + employes;
     }
 }

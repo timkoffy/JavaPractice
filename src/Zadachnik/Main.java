@@ -402,7 +402,6 @@ public class Main {
         // ---
 
         // 1.6.9.
-
         Town townA = new Town("A");
         Town townB = new Town("B", new Route(townA), new Route(townA));
         Town townC = new Town("C", new Route(townA),  new Route(townB));
@@ -410,12 +409,47 @@ public class Main {
         System.out.println(townA);
         System.out.println(townB);
         System.out.println(townC);
+        System.out.println();
 
         townB.addRoute(townA, 1);
 
         System.out.println(townA);
         System.out.println(townB);
         System.out.println(townC);
+        System.out.println();
+
+        // 1.6.10.
+        Department d1 = new Department("IT");
+        Department d2 = new Department("HR");
+
+        Employee employee1 = new Employee("Петров");
+        Employee employee2 = new Employee("Козлов");
+        Employee employee3 = new Employee("Сидоров");
+
+        System.out.println(employee1);
+        System.out.println(employee2);
+        System.out.println(employee3);
+        System.out.println(d1);
+        System.out.println(d2);
+        System.out.println();
+
+        d1.addEmployee(employee2);
+        d1.addEmployee(employee3);
+
+        employee2.setDepartment(d2);
+        employee1.setDepartment(d1);
+
+        d1.setBoss(employee2);
+
+        employee2.setDepartment(d2);
+
+        System.out.println(employee1);
+        System.out.println(employee2);
+        System.out.println(employee3);
+        System.out.println(d1);
+        System.out.println(d2);
+        System.out.println();
+
 
     }
 }
