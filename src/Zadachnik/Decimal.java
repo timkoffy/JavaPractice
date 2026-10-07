@@ -1,6 +1,6 @@
 package Zadachnik;
 
-public final class Decimal {
+public final class Decimal extends Number {
     private int numerator;
     private int denominator;
 
@@ -109,6 +109,26 @@ public final class Decimal {
 
         numerator /= gcd;
         denominator /= gcd;
+    }
+
+    @Override
+    public int intValue() {
+        return (int) doubleValue();
+    }
+
+    @Override
+    public long longValue() {
+        return (long) doubleValue();
+    }
+
+    @Override
+    public float floatValue() {
+        return (float) numerator / denominator;
+    }
+
+    @Override
+    public double doubleValue() {
+        return (double) numerator / denominator;
     }
 
     static private int computeGcd(int a, int b) {
