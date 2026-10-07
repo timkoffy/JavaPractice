@@ -1,6 +1,6 @@
 package Zadachnik;
 
-public class Decimal {
+public final class Decimal {
     private int numerator;
     private int denominator;
 
@@ -35,7 +35,7 @@ public class Decimal {
 
         res.numerator += tmp;
 
-        relax();
+        res.relax();
 
         return res;
     }
@@ -56,7 +56,7 @@ public class Decimal {
 
         res.numerator -= tmp;
 
-        relax();
+        res.relax();
 
         return res;
     }
