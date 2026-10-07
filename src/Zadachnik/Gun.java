@@ -1,11 +1,12 @@
 package Zadachnik;
 
-public class Gun {
+public class Gun extends Weapon {
     static private final int DEFAULT_MAX_BULLET_COUNT = 5;
-    private int bulletCount;
     private int maxBulletCount;
 
     public Gun(int maxBulletCount, int bulletCount) {
+        super(0);
+
         if (maxBulletCount < 0) {
             maxBulletCount = DEFAULT_MAX_BULLET_COUNT;
         }
@@ -16,7 +17,7 @@ public class Gun {
         } else if (bulletCount > maxBulletCount) {
             bulletCount = maxBulletCount;
         }
-        this.bulletCount = bulletCount;
+        load(bulletCount);
     }
 
     public Gun(int maxBulletCount) {
@@ -32,19 +33,19 @@ public class Gun {
     }
 
     public int getBulletCount() {
-        return bulletCount;
+        return ammo();
     }
 
     public boolean isLoaded() {
-        return bulletCount > 0;
+        return ammo() > 0;
     }
 
-    public void fire() {
-        if (bulletCount < 1) {
+    public void shoot() {
+        if (ammo() < 1) {
             System.out.println("клац");
         } else {
             System.out.println("пау");
-            bulletCount--;
+            getAmmo();
         }
     }
 
@@ -53,21 +54,22 @@ public class Gun {
             throw new IllegalArgumentException("Передано отрицательное количество патронов для перезарядки");
         }
 
-        int freeSpace = maxBulletCount - this.bulletCount;
+        int current = ammo();
+        int freeSpace = maxBulletCount - current;
 
         if (bulletCount <= freeSpace) {
-            this.bulletCount += bulletCount;
+            load(current + bulletCount);
             return 0;
         }
 
         int overflow = bulletCount - freeSpace;
-        this.bulletCount = maxBulletCount;
+        load(maxBulletCount);
         return overflow;
     }
 
     public int unload() {
-        int res = bulletCount;
-        bulletCount = 0;
+        int res = ammo();
+        load(0);
         return res;
     }
 }

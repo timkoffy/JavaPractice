@@ -450,6 +450,9 @@ public class Main {
         System.out.println(d2);
         System.out.println();
 
-
+        Gun gun = new Automatic(9, 2);
+        for (int i = 0; i < 5; i++) {
+            gun.shoot();
+        }
     }
 }

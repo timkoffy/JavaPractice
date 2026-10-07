@@ -31,9 +31,9 @@ public class Automatic extends Gun {
     }
 
     @Override
-    public void fire() {
+    public void shoot() {
         for (int i = 0; i < rateOfFire; i++) {
-            super.fire();
+            super.shoot();
         }
     }
 
@@ -43,7 +43,7 @@ public class Automatic extends Gun {
         }
         int totalShots = seconds * rateOfFire;
         for (int i = 0; i < totalShots; i++) {
-            super.fire();
+            super.shoot();
         }
     }
 }
