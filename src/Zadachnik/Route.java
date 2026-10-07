@@ -13,6 +13,18 @@ public class Route {
         this(target, 0);
     }
 
+    public Town getTarget() {
+        return target;
+    }
+
+    public int getCost() {
+        return cost;
+    }
+
+    public void setCost(int cost) {
+        this.cost = cost;
+    }
+
     @Override
     public String toString() {
         return target.getTitle() + ": " + cost;

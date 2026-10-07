@@ -27,16 +27,36 @@ public class Town {
         return title;
     }
 
+    public List<Route> getRoutes() {
+        return new ArrayList<>(routes);
+    }
+
     public void addRoute(Town target, int cost) {
         if (target == null) {
             throw new IllegalArgumentException("В пути не указан город назначения");
         }
 
-        if (routes.contains(target)) {
-            return;
+        for (Route route : routes) {
+            if (route.getTarget() == target) {
+                route.setCost(cost);
+                return;
+            }
         }
 
-        this.routes.addLast(new Route(target, cost));
+        this.routes.add(new Route(target, cost));
+    }
+
+    public void removeRoute(Town target) {
+        if (target == null) {
+            throw new IllegalArgumentException("В пути не указан город назначения");
+        }
+
+        for (Route route : routes) {
+            if (route.getTarget() == target) {
+                routes.remove(route);
+                return;
+            }
+        }
     }
 
     @Override
