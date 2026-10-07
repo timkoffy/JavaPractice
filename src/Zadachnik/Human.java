@@ -8,6 +8,9 @@ public class Human {
     private Human father;
 
     public Human(Name name, int height) {
+        if (name == null) {
+            throw new NullPointerException("Имя при создании человека не указано");
+        }
         this.name = name;
         this.height = height;
     }
@@ -27,8 +30,7 @@ public class Human {
     }
 
     public Human(String firstName, Human father) {
-        this(new Name("", firstName, ""));
-        setMiddleNameByFather(father);
+        this(new Name("", firstName, ""), father);
     }
 
     public String getFirstName() {
@@ -47,9 +49,12 @@ public class Human {
         return name.getMiddleName();
     }
 
-    public void setFather(Human father) {
-        this.father = father;
-        setMiddleNameByFather(father);
+    public Name getName() {
+        return name;
+    }
+
+    public Human getFather() {
+        return father;
     }
 
     private void setMiddleNameByFather(Human father) {
