@@ -1,22 +1,28 @@
 package zadachnik;
 
-import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CustomPoint {
     private List<Integer> coords;
-    private List<Object> properties;
+    private Map<String, Object> properties;
 
-    public CustomPoint(List<Integer> coords, List<Object> properties) {
+    public CustomPoint(List<Integer> coords) {
         if (coords.isEmpty()) {
             throw new IllegalArgumentException("У точки должно быть хотя бы одно измерение");
         }
         this.coords = coords;
-        this.properties = properties;
+        this.properties = new LinkedHashMap<>();
     }
 
-    public CustomPoint(List<Integer> coords) {
-        this(coords, new ArrayList<>());
+    public CustomPoint(Integer... coords) {
+        this(List.of(coords));
+    }
+
+    public CustomPoint set(String name, Object value) {
+        properties.put(name, value);
+        return this;
     }
 
     @Override
@@ -29,10 +35,9 @@ public class CustomPoint {
         res += coords.getLast() + "}";
 
         if (!properties.isEmpty()) {
-            for (int i = 0; i < properties.size() - 1; i++) {
-                res += ", " + properties.get(i);
+            for (Map.Entry<String, Object> e : properties.entrySet()) {
+                res += ", " + e.getKey() + ": " + e.getValue();
             }
-            res += ", " + properties.getLast() + ".";
         }
 
         return res;

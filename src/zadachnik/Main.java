@@ -458,7 +458,7 @@ public class Main {
             gun.shoot();
         }
 
-        CustomPoint cp1 = new CustomPoint(List.of(1, 2), List.of("красного цвета"));
+        CustomPoint cp1 = new CustomPoint(List.of(1, 2)).set("цвет", "красный").set("размер", 20);
              System.out.println(cp1);
     }
 }
