@@ -1,7 +1,10 @@
 package zadachnik;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
-    public static void main(String[] args) {
+     public static void main(String[] args) {
 //        // ====== 1.1.x ======
 //
 //        // 1.1.1.
@@ -454,5 +457,8 @@ public class Main {
         for (int i = 0; i < 5; i++) {
             gun.shoot();
         }
+
+        CustomPoint cp1 = new CustomPoint(List.of(1, 2), List.of("красного цвета"));
+             System.out.println(cp1);
     }
 }
