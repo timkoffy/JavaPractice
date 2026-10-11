@@ -17,6 +17,10 @@ public class ClosedPolyLine extends PolyLine {
 
     @Override
     public double length() {
-        return super.length() + Point.dist(getPoint(0), getPoint(getPoints().size() - 1));
+        return super.length()
+                + Point.dist(
+                    getPoint(0),
+                    getPoint(getPoints().size() - 1)
+                );
     }
 }
