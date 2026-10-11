@@ -1,28 +1,58 @@
 package zadachnik;
 
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class CustomPoint {
     private List<Integer> coords;
-    private Map<String, Object> properties;
+    private List<Property> properties;
 
-    public CustomPoint(List<Integer> coords) {
+    public CustomPoint(List<Integer> coords, Property... properties) {
         if (coords.isEmpty()) {
             throw new IllegalArgumentException("У точки должно быть хотя бы одно измерение");
         }
         this.coords = coords;
-        this.properties = new LinkedHashMap<>();
+
+        this.properties = new ArrayList<>();
+        if (properties == null) return;
+        for (Property p : properties) {
+            putProperty(p);
+        }
     }
 
     public CustomPoint(Integer... coords) {
         this(List.of(coords));
     }
 
-    public CustomPoint set(String name, Object value) {
-        properties.put(name, value);
-        return this;
+    public CustomPoint(CustomPoint point) {
+        this.coords = new ArrayList<>(point.coords);
+        this.properties = new ArrayList<>(point.properties);
+    }
+
+    public void putProperty(Property property) {
+        Class propertyType = property.getClass();
+
+        for (int i = 0; i < properties.size(); i++) {
+            if (properties.get(i).getClass() == propertyType) {
+                properties.set(i, property);
+                return;
+            }
+        }
+
+        properties.add(property);
+    }
+
+    public <T extends Property> T getProperty(Class<T> type) {
+        for (Property property : properties) {
+            if (property.getClass() == type) {
+                return (T) property;
+            }
+        }
+        return null;
+    }
+
+    public List<Property> getProperties() {
+        return new ArrayList<>(properties);
     }
 
     @Override
@@ -35,8 +65,8 @@ public class CustomPoint {
         res += coords.getLast() + "}";
 
         if (!properties.isEmpty()) {
-            for (Map.Entry<String, Object> e : properties.entrySet()) {
-                res += ", " + e.getKey() + ": " + e.getValue();
+            for (Property property : properties) {
+                res += ", " + property.getKey() + ": " + property.getValue();
             }
         }
 
