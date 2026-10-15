@@ -2,12 +2,8 @@ package zadachnik;
 
 public class Main {
         public static void main(String[] args) {
-                System.out.println(
-                        zadachnik.math.Math.sum(
-                                new Decimal(1, 3),
-                                1
-                        )
-                );
+                Student st1 = new Student("vasya", new GradeBinaryRule(), 2, 3);
+                System.out.println(st1);
         }
 
 //        public static double sum(Number... nums){

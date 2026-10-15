@@ -6,22 +6,34 @@ import java.util.List;
 public class Student {
     private String name;
     private List<Integer> grades;
+    private GradeRule rule;
 
-    public Student(String name) {
+    public Student(String name, GradeRule rule, List<Integer> grades) {
         this.name = name;
-        this.grades = new ArrayList<>();
-    }
 
-    public Student(String name, List<Integer> grades) {
-        this.name = name;
+        if (rule == null) rule = new GradeAllTrueRule();
+        this.rule = rule;
 
         validateGrades(grades);
         this.grades = new ArrayList<>(grades);
     }
 
+    public Student(String name, GradeRule rule, Integer... grades) {
+        this(name, rule, List.of(grades));
+    }
+
+    public Student(String name, List<Integer> grades) {
+        this(name, null, grades);
+    }
+
     public Student(String name, Integer... grades) {
         this(name, List.of(grades));
     }
+
+    public Student(String name) {
+        this(name, new ArrayList<>());
+    }
+
 
     public List<Integer> getGrades() {
         return new ArrayList<>(grades);
@@ -33,8 +45,9 @@ public class Student {
     }
 
     public void setGrade(int idx, Integer grade) {
-        validateGrade(grade);
-
+        if (!rule.validate(grade)) {
+            throw new IllegalArgumentException("Оценка не подходит под правило");
+        }
         grades.set(idx, grade);
     }
 
@@ -61,13 +74,9 @@ public class Student {
         }
 
         for (Integer grade : grades) {
-            validateGrade(grade);
-        }
-    }
-
-    private void validateGrade(Integer grade) {
-        if (grade == null || grade < 2 || grade > 5) {
-            throw new IllegalArgumentException("Оценка должна быть от 2 до 5");
+            if (!rule.validate(grade)) {
+                throw new IllegalArgumentException("Оценка не подходит под правило");
+            }
         }
     }
 
