@@ -1,9 +1,13 @@
 package zadachnik;
 
+import zadachnik.birds.BirdManager;
+import zadachnik.birds.Cuckoo;
+import zadachnik.birds.Sparrow;
+
 public class Main {
         public static void main(String[] args) {
-                Student st1 = new Student("vasya", new GradeBinaryRule(), 2, 3);
-                System.out.println(st1);
+                Sparrow b1 = new Sparrow();
+                BirdManager.singAll(b1, b1);
         }
 
 //        public static double sum(Number... nums){
