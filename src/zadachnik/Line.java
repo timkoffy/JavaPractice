@@ -2,7 +2,7 @@ package zadachnik;
 
 import java.lang.Math;
 
-public class Line {
+public class Line implements Lengthable {
     private Point begin;
     private Point end;
 
