@@ -1,14 +1,13 @@
 package zadachnik;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Main {
         public static void main(String[] args) {
-                Square sq1 = new Square(new Point(0, 0), 1);
-                Square sq2 = new Square(new Point(2, 0), 1);
-                Square sq3 = new Square(new Point(-2, 0), 1);
-                System.out.println(new PolyLine(PolyLine.mergePolyLines(sq1, sq2, sq3)));
+                System.out.println(
+                        zadachnik.math.Math.sum(
+                                new Decimal(1, 3),
+                                1
+                        )
+                );
         }
 
 //        public static double sum(Number... nums){

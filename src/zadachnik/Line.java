@@ -1,5 +1,7 @@
 package zadachnik;
 
+import java.lang.Math;
+
 public class Line {
     private Point begin;
     private Point end;

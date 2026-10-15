@@ -1,5 +1,7 @@
 package zadachnik;
 
+import java.lang.Math;
+
 public final class Point3D extends Point {
     private int z;
 

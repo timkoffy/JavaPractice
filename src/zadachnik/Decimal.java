@@ -1,5 +1,7 @@
 package zadachnik;
 
+import java.lang.Math;
+
 public final class Decimal extends Number {
     private int numerator;
     private int denominator;
