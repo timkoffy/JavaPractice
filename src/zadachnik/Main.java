@@ -9,10 +9,6 @@ import zadachnik.geometry.FigureManager;
 
 public class Main {
         public static void main(String[] args) {
-                Circle c1 = new Circle(1);
-                Circle c2 = new Circle(1);
-                zadachnik.geometry.Square sq1 = new Square(1);
-                System.out.println(FigureManager.areaAll(c1,c2,sq1));
         }
 
 //        public static double sum(Number... nums){
