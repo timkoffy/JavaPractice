@@ -1,5 +1,5 @@
 package zadachnik.geometry;
 
-abstract class Figure {
-    abstract double area();
+public abstract class Figure {
+    public abstract double area();
 }

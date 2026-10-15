@@ -3,11 +3,16 @@ package zadachnik;
 import zadachnik.birds.BirdManager;
 import zadachnik.birds.Cuckoo;
 import zadachnik.birds.Sparrow;
+import zadachnik.geometry.Circle;
+import zadachnik.geometry.Square;
+import zadachnik.geometry.FigureManager;
 
 public class Main {
         public static void main(String[] args) {
-                Sparrow b1 = new Sparrow();
-                BirdManager.singAll(b1, b1);
+                Circle c1 = new Circle(1);
+                Circle c2 = new Circle(1);
+                zadachnik.geometry.Square sq1 = new Square(1);
+                System.out.println(FigureManager.areaAll(c1,c2,sq1));
         }
 
 //        public static double sum(Number... nums){
