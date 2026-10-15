@@ -30,13 +30,12 @@ public class Square {
         this.sideLength = sideLength;
     }
 
-    public PolyLine toPolyLine() {
-        return new PolyLine(
+    public PolyLine getPolyLine() {
+        return new ClosedPolyLine(
                 new Point(rootPoint),
                 new Point(rootPoint.getX() + sideLength, rootPoint.getY()),
                 new Point(rootPoint.getX() + sideLength, rootPoint.getY() + sideLength),
-                new Point(rootPoint.getX(), rootPoint.getY() + sideLength),
-                new Point(rootPoint)
+                new Point(rootPoint.getX(), rootPoint.getY() + sideLength)
                 );
     }
 

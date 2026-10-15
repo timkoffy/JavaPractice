@@ -5,32 +5,37 @@ import java.util.List;
 
 public class Main {
         public static void main(String[] args) {
-                // чтобы добавить атрибут точке - передаем
-                // объект Property с соответствующей
-                // реализацией (ColorProperty, SizeProperty):
-                CustomPoint cp1 = new CustomPoint(
-                        List.of(1, 2),
-                        new ColorProperty("красная"),
-                        new SizeProperty(4)
-                );
+                System.out.println();
 
-                // при добавлении свойства, если таковое
-                // имеется - просто обновляем значение.
-                //
-                // методы, которые объединяют в себе
-                //  - добавление значения и
-                //  - обновление значения
-                // называют put-методами:
-                cp1.putProperty(new ColorProperty("синяя"));
+                Square sq1 = new Square(new Point(0, 0), 2);
+                PolyLine pl1 = sq1.getPolyLine();
+                ClosedPolyLine cpl1 = (ClosedPolyLine) sq1.getPolyLine();
 
-                System.out.println(cp1);
+                System.out.println(sq1);
+                System.out.println(pl1);
+                System.out.println(pl1.getClass());
+                System.out.println(cpl1);
+                System.out.println(cpl1.getClass());
 
-                // когда получаем свойство - передаем в аргументе
-                // объект Class соответствующего свойства.
-                //
-                // делается через Объект.class:
-                SizeProperty sp1 = cp1.getProperty(SizeProperty.class);
-                int cp1Size = sp1.getValue();
-                System.out.println(cp1Size);
         }
+
+//        public static double sum(Number... nums){
+//                double sum = 0;
+//                for (Number n : nums) {
+//                        sum += n.doubleValue();
+//                }
+//                return sum;
+//        }
+//
+//        public static Lengthable findMaxLength(Lengthable... objs) {
+//                double maxLen = 0;
+//                Lengthable maxObj = objs[0];
+//                for (Lengthable obj : objs) {
+//                        if (obj.length() > maxLen) {
+//                                maxObj = obj;
+//                                maxLen = obj.length();
+//                        }
+//                }
+//                return maxObj;
+//        }
 }

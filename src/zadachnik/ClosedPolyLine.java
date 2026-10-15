@@ -16,11 +16,11 @@ public class ClosedPolyLine extends PolyLine {
     }
 
     @Override
-    public double length() {
-        return super.length()
-                + Point.dist(
-                    getPoint(0),
-                    getPoint(getPoints().size() - 1)
-                );
+    public List<Point> toNormalizedPoints() {
+        List<Point> res = super.toNormalizedPoints();
+        if (res.size() > 2) {
+            res.add(res.getFirst());
+        }
+        return res;
     }
 }

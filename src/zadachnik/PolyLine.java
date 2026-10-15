@@ -3,7 +3,7 @@ package zadachnik;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PolyLine {
+public class PolyLine implements Lengthable {
     private List<Point> points;
 
     public PolyLine(List<Point> points) {
@@ -64,6 +64,10 @@ public class PolyLine {
         this.points.add(new Point(p));
     }
 
+    public List<Point> toNormalizedPoints() {
+        return points;
+    }
+
     public double length() {
         double res = 0;
 
@@ -76,6 +80,6 @@ public class PolyLine {
 
     @Override
     public String toString() {
-        return "Линия " + points;
+        return "Линия " + points + "\n  нормализованное: " + toNormalizedPoints();
     }
 }
