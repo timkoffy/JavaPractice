@@ -78,6 +78,14 @@ public class PolyLine implements Lengthable {
         return res;
     }
 
+    public static PolyLine mergePolyLines(PolyLineable... objs) {
+        List<Point> resPoints = new ArrayList<>();
+        for (PolyLineable obj : objs) {
+            resPoints.addAll(obj.getPolyLine().toNormalizedPoints());
+        }
+        return new PolyLine(resPoints);
+    }
+
     @Override
     public String toString() {
         return "Линия " + points + "\n  нормализованное: " + toNormalizedPoints();

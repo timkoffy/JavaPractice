@@ -5,18 +5,10 @@ import java.util.List;
 
 public class Main {
         public static void main(String[] args) {
-                System.out.println();
-
-                Square sq1 = new Square(new Point(0, 0), 2);
-                PolyLine pl1 = sq1.getPolyLine();
-                ClosedPolyLine cpl1 = (ClosedPolyLine) sq1.getPolyLine();
-
-                System.out.println(sq1);
-                System.out.println(pl1);
-                System.out.println(pl1.getClass());
-                System.out.println(cpl1);
-                System.out.println(cpl1.getClass());
-
+                Square sq1 = new Square(new Point(0, 0), 1);
+                Square sq2 = new Square(new Point(2, 0), 1);
+                Square sq3 = new Square(new Point(-2, 0), 1);
+                System.out.println(new PolyLine(PolyLine.mergePolyLines(sq1, sq2, sq3)));
         }
 
 //        public static double sum(Number... nums){

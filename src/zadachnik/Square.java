@@ -1,6 +1,6 @@
 package zadachnik;
 
-public class Square {
+public class Square implements PolyLineable {
     private Point rootPoint;
     private int sideLength;
 
