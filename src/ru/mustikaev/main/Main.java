@@ -1,4 +1,4 @@
-package ru.mustikaev;
+package ru.mustikaev.main;
 
 import ru.mustikaev.edu.Grade2To5Rule;
 import ru.mustikaev.edu.GradeBinaryRule;
@@ -6,7 +6,6 @@ import ru.mustikaev.edu.GradeEvenRule;
 import ru.mustikaev.edu.Student;
 
 import java.util.List;
-
 
 public class Main {
         public static void main(String[] args) {
@@ -23,6 +22,5 @@ public class Main {
                 System.out.println(st1);
                 System.out.println(st2);
                 System.out.println(st3);
-
         }
 }
