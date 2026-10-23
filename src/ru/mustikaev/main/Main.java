@@ -1,26 +1,28 @@
 package ru.mustikaev.main;
 
-import ru.mustikaev.edu.Grade2To5Rule;
-import ru.mustikaev.edu.GradeBinaryRule;
-import ru.mustikaev.edu.GradeEvenRule;
-import ru.mustikaev.edu.Student;
+import ru.mustikaev.math.Decimal;
+import ru.mustikaev.math.MathUtils;
 
-import java.util.List;
+import java.math.BigInteger;
+
+import static ru.mustikaev.math.MathUtils.power;
 
 public class Main {
         public static void main(String[] args) {
-                Student st1 = new Student("vasya", new GradeEvenRule());
-                Student st2 = new Student("petya", new Grade2To5Rule());
-                Student st3 = new Student("roma", new GradeBinaryRule());
+                if (args.length == 2) {
+                        System.out.println(power(args[0], args[1]));
+                }
 
-                System.out.println(st1);
-                System.out.println(st2);
-                System.out.println(st3);
 
-                Student.addGradeAll(List.of(st1, st2, st3), 4);
+        }
 
-                System.out.println(st1);
-                System.out.println(st2);
-                System.out.println(st3);
+        public static void test() {
+                // 3.1.3. выражение 7 + 11/3 + 3.21 + 12345678912345678912
+                System.out.println(MathUtils.sum(
+                        7,
+                        new Decimal(11,3),
+                        3.21,
+                        new BigInteger("12345678912345678912")
+                ));
         }
 }
