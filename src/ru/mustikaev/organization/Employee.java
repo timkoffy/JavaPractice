@@ -1,16 +1,13 @@
-package zadachnik;
+package ru.mustikaev.organization;
 
 public class Employee {
     private String name;
-    private Department department;
+    Department department;
 
     public Employee(String name, Department department) {
         this(name);
 
-        if (department != null) {
-            department.addEmployee(this);
-        }
-        this.department = department;
+        Department.assign(this, department);
     }
 
     public Employee(String name) {
@@ -25,17 +22,7 @@ public class Employee {
     }
 
     public void setDepartment(Department department) {
-        if (department == null) {
-            this.department = null;
-            return;
-        }
-
-        if (this.department == department) {
-            return;
-        }
-
-        department.addEmployee(this);
-        this.department = department;
+        Department.assign(this, department);
     }
 
     @Override

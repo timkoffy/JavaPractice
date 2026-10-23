@@ -1,4 +1,4 @@
-package zadachnik;
+package ru.mustikaev.organization;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,36 +48,42 @@ public class Department {
 
     public void setBoss(Employee newBoss) {
         if (!employes.contains(newBoss)) {
-            addEmployee(newBoss);
+            assign(newBoss, this);
         }
         this.boss = newBoss;
     }
 
-    public void addEmployee(Employee employee) {
-        if (employee == null || employes.contains(employee)) {
-            return;
-        }
-
-        Department prevDepartment = employee.getDepartment();
-        if (prevDepartment != null) {
-            prevDepartment.removeEmployee(employee);
-        }
-
-        employes.add(employee);
-        employee.setDepartment(this);
-    }
-
-    public void removeEmployee(Employee employee) {
+    static void assign(Employee employee, Department target) {
         if (employee == null) {
             return;
         }
 
-        if (employes.contains(employee)) {
-            if (boss == employee) {
-                boss = null;
+        Department current = employee.department;
+        if (current == target) {
+            return;
+        }
+
+        if (current != null) {
+            current.employes.remove(employee);
+            if (current.boss == employee) {
+                current.boss = null;
             }
-            employes.remove(employee);
-            employee.setDepartment(null);
+        }
+
+        employee.department = target;
+
+        if (target != null) {
+            target.employes.add(employee);
+        }
+    }
+
+    public void addEmployee(Employee employee) {
+        assign(employee, this);
+    }
+
+    public void removeEmployee(Employee employee) {
+        if (employee != null && employee.department == this) {
+            assign(employee, null);
         }
     }
 
