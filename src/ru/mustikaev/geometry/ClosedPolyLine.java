@@ -1,4 +1,4 @@
-package ru.mustikaev.geometry.polyline;
+package ru.mustikaev.geometry;
 
 import java.util.List;
 
