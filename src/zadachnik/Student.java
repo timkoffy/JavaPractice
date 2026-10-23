@@ -11,7 +11,7 @@ public class Student {
     public Student(String name, GradeRule rule, List<Integer> grades) {
         this.name = name;
 
-        if (rule == null) rule = new GradeAllTrueRule();
+        if (rule == null) rule = GradeRule.INSTANCE;
         this.rule = rule;
 
         validateGrades(grades);
@@ -34,6 +34,10 @@ public class Student {
         this(name, new ArrayList<>());
     }
 
+    public Student(Student student) {
+        this(student.name, student.rule, student.grades);
+    }
+
 
     public List<Integer> getGrades() {
         return new ArrayList<>(grades);
@@ -49,6 +53,32 @@ public class Student {
             throw new IllegalArgumentException("Оценка не подходит под правило");
         }
         grades.set(idx, grade);
+    }
+
+    public void addGrade(int grade) {
+        if (!rule.validate(grade)) {
+            throw new IllegalArgumentException();
+        }
+        grades.add(grade);
+    }
+
+    public static void addGradeAll(List<Student> students, int grade) {
+        List<Student> res = new ArrayList<>(); // через список оценок
+        for (Student student : students) {
+            res.add(new Student(student));
+        }
+
+        try {
+            for (int i = 0; i < res.size(); i++) {
+                res.get(i).addGrade(grade);
+            }
+        } catch (IllegalArgumentException e) {
+            return;
+        }
+
+        for (int i = 0; i < students.size(); i++) {
+            students.get(i).setGrades(res.get(i).getGrades());
+        }
     }
 
     public double getAvgGrade() {
