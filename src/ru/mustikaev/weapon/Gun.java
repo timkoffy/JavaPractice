@@ -68,8 +68,8 @@ public class Gun extends Weapon {
     }
 
     public int unload() {
-        int res = ammo();
-        load(0);
+        int res = ammo;
+        ammo = 0;
         return res;
     }
 }

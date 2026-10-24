@@ -2,12 +2,11 @@ package ru.mustikaev.main;
 
 import ru.mustikaev.math.Decimal;
 import ru.mustikaev.math.MathUtils;
-
-import java.math.BigInteger;
+import ru.mustikaev.geometry.Point;
 
 import static ru.mustikaev.math.MathUtils.power;
 
-import ru.mustikaev.geometry.Point;
+import java.math.BigInteger;
 
 public class Main {
         public static void main(String[] args) {

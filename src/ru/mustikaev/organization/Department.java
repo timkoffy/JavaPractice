@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Department {
-    static private final String UNKNOWN_DEPARTMENT_TITLE = "Неизвестный отдел";
+    private static final String UNKNOWN_DEPARTMENT_TITLE = "Неизвестный отдел";
 
     private String title;
     private Employee boss;
