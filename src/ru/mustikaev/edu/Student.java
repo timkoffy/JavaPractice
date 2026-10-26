@@ -1,10 +1,9 @@
 package ru.mustikaev.edu;
 
 import java.util.ArrayList;
+import static java.util.Collections.sort;
 import java.util.List;
 import java.util.Objects;
-
-import static java.util.Collections.sort;
 
 public class Student {
     private String name;
@@ -53,14 +52,14 @@ public class Student {
 
     public void setGrade(int idx, Integer grade) {
         if (!rule.validate(grade)) {
-            throw new InvalidGradeException(grade);
+            throw new InvalidGradeException(name, grade);
         }
         grades.set(idx, grade);
     }
 
     public void addGrade(int grade) {
         if (!rule.validate(grade)) {
-            throw new InvalidGradeException(grade);
+            throw new InvalidGradeException(name, grade);
         }
         grades.add(grade);
     }
@@ -108,7 +107,7 @@ public class Student {
 
         for (Integer grade : grades) {
             if (!rule.validate(grade)) {
-                throw new InvalidGradeException(grade);
+                throw new InvalidGradeException(name, grade);
             }
         }
     }

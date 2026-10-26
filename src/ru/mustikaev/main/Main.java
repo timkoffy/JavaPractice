@@ -4,7 +4,7 @@ import ru.mustikaev.connection.*;
 
 public class Main {
         public static void main(String[] args) {
-                
+                task424();
         }
 
         public static void task412To421() {
@@ -41,5 +41,20 @@ public class Main {
                         } catch (NumberFormatException | ArithmeticException e) {}
                 }
                 return first;
+        }
+
+        public static void task424() {
+                // 4.2.4
+                ExampleConnector connector = new ExampleConnector();
+                Connection connection = new Connection("ermakov.edu"); 
+                try {
+                        connector.makeConnect(connection);
+                        System.out.println("success!");
+                } catch (LostConnectionException | ClosedResourceException e) {
+                        System.out.println("эксепшн в getData()");
+                        connector.unregister();
+                } catch (RuntimeException e) {
+                        System.out.println("эксепшн в register()");
+                }
         }
 }
