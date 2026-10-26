@@ -1,7 +1,6 @@
 package ru.mustikaev.edu;
 
 import java.util.ArrayList;
-import static java.util.Collections.sort;
 import java.util.List;
 import java.util.Objects;
 
@@ -112,23 +111,39 @@ public class Student {
         }
     }
 
+    // @Override
+    // public boolean equals(Object obj) {
+    //     if (this == obj) return true;
+    //     if (obj == null || obj.getClass() != getClass()) return false;
+    //     Student student = (Student) obj;
+    //     List<Integer> gradesCopy = new ArrayList<>(grades);
+    //     List<Integer> studGradesCopy = new ArrayList<>(student.grades);
+    //     sort(gradesCopy);
+    //     sort(studGradesCopy);
+    //     return name.equals(student.name) && gradesCopy.equals(studGradesCopy);
+    // }
+
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || obj.getClass() != getClass()) return false;
-        Student student = (Student) obj;
-        List<Integer> gradesCopy = new ArrayList<>(grades);
-        List<Integer> studGradesCopy = new ArrayList<>(student.grades);
-        sort(gradesCopy);
-        sort(studGradesCopy);
-        return name.equals(student.name) && gradesCopy.equals(studGradesCopy);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || o.getClass() != getClass()) return false;
+
+        Student student = (Student) o;
+        
+        return Objects.equals(name, student.name) 
+            && getAvgGrade() == student.getAvgGrade();
     }
+
+    // @Override
+    // public int hashCode() {
+    //     List<Integer> gradesCopy = new ArrayList<>(grades);
+    //     sort(gradesCopy);
+    //     return Objects.hash(name, gradesCopy);
+    // }
 
     @Override
     public int hashCode() {
-        List<Integer> gradesCopy = new ArrayList<>(grades);
-        sort(gradesCopy);
-        return Objects.hash(name, gradesCopy);
+        return Objects.hash(name, getAvgGrade());
     }
 
     @Override
