@@ -26,6 +26,20 @@ public class Route {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || !(o instanceof Route)) return false;
+
+        Route route = (Route) o;
+        return target == route.target;
+    }
+
+    @Override
+    public int hashCode() {
+        return System.identityHashCode(target);
+    }
+
+    @Override
     public String toString() {
         return target.getTitle() + ": " + cost;
     }

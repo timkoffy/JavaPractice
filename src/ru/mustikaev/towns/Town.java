@@ -2,6 +2,7 @@ package ru.mustikaev.towns;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Town {
     private String title;
@@ -66,6 +67,42 @@ public class Town {
                 return;
             }
         }
+    }
+
+    @Override 
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || !(o instanceof Town)) return false;
+        
+        Town town = (Town) o;
+
+        if (!title.equals(town.title)) return false;
+
+        if (this.routes.size() != town.routes.size()) return false;
+
+        for (Route routeA : this.routes) {
+            boolean found = false;
+            for (Route routeB : town.routes) {
+                if (routeA.equals(routeB)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        for (Route route : routes) {
+            hash += route.hashCode();
+        }
+        return Objects.hash(title, hash);
     }
 
     @Override
