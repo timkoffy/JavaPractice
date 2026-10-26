@@ -1,6 +1,6 @@
 package ru.mustikaev.geometry;
 
-import java.lang.Math;
+import java.util.Objects;
 
 public class Line implements Lengthable {
     private Point begin;
@@ -49,6 +49,25 @@ public class Line implements Lengthable {
                 Math.pow(end.getX() - begin.getX(), 2) +
                 Math.pow(end.getY() - begin.getY(), 2));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || !(o.getClass() == this.getClass())) {
+            return false;
+        }
+
+        Line line = (Line) o;
+
+        return (Objects.equals(begin, line.begin) && Objects.equals(end, line.end)) 
+            || (Objects.equals(end, line.begin) && Objects.equals(begin, line.end)) ;
+    }
+
+    @Override 
+    public int hashCode() {
+        return Objects.hashCode(end) + Objects.hashCode(begin);
+    }
+
 
     @Override
     public String toString() {

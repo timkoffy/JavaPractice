@@ -36,6 +36,7 @@ public final class Point3D extends Point {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || !(o.getClass() == this.getClass())) {
             return false;
         }

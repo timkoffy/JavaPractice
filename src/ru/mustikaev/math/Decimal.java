@@ -125,23 +125,6 @@ public final class Decimal extends Number {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (o == null || !(o.getClass() == this.getClass())) {
-            return false;
-        }
-
-        Decimal decimal = (Decimal) o;
-
-        return numerator == decimal.numerator 
-            && denominator == decimal.denominator;
-    }
-
-    @Override 
-    public int hashCode() {
-        return Objects.hash(numerator, denominator);
-    }
-
-    @Override
     public int intValue() {
         return (int) doubleValue();
     }
@@ -159,6 +142,24 @@ public final class Decimal extends Number {
     @Override
     public double doubleValue() {
         return (double) numerator / denominator;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || !(o.getClass() == this.getClass())) {
+            return false;
+        }
+
+        Decimal decimal = (Decimal) o;
+
+        return numerator == decimal.numerator 
+            && denominator == decimal.denominator;
+    }
+
+    @Override 
+    public int hashCode() {
+        return Objects.hash(numerator, denominator);
     }
 
     @Override

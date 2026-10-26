@@ -1,6 +1,6 @@
 package ru.mustikaev.geometry;
 
-import java.lang.Math;
+import java.util.Objects;
 
 public sealed class Point permits Point3D {
     private int x;
@@ -41,6 +41,23 @@ public sealed class Point permits Point3D {
         return Math.sqrt(
                 Math.pow(p2.getX() - p1.getX(), 2) +
                 Math.pow(p2.getY() - p1.getY(), 2));
+    }
+
+    @Override 
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || !(o.getClass() == this.getClass())) {
+            return false;
+        }
+
+        Point point = (Point) o;
+
+        return x == point.x && y == point.y;
+    }
+
+    @Override 
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 
     @Override
