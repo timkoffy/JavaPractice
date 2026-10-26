@@ -2,7 +2,7 @@ package ru.mustikaev.geometry;
 
 import java.util.Objects;
 
-public sealed class Point permits Point3D {
+public sealed class Point implements Cloneable permits Point3D {
     private int x;
     private int y;
 
@@ -58,6 +58,15 @@ public sealed class Point permits Point3D {
     @Override 
     public int hashCode() {
         return Objects.hash(x, y);
+    }
+
+    @Override 
+    public Point clone() {
+        try {
+            return (Point) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException();
+        }
     }
 
     @Override

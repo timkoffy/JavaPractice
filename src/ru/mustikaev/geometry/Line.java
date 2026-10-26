@@ -2,7 +2,7 @@ package ru.mustikaev.geometry;
 
 import java.util.Objects;
 
-public class Line implements Lengthable {
+public class Line implements Lengthable, Cloneable {
     private Point begin;
     private Point end;
 
@@ -68,6 +68,19 @@ public class Line implements Lengthable {
         return Objects.hashCode(end) + Objects.hashCode(begin);
     }
 
+    @Override
+    public Line clone() {
+        try {
+            Line line = (Line) super.clone();
+
+            line.begin = new Point(this.begin);
+            line.end = new Point(this.end);
+
+            return line;
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException();
+        }
+    }
 
     @Override
     public String toString() {

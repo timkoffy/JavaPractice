@@ -2,7 +2,7 @@ package ru.mustikaev.math;
 
 import java.util.Objects;
 
-public final class Decimal extends Number {
+public final class Decimal extends Number implements Cloneable {
     private int numerator;
     private int denominator;
 
@@ -162,6 +162,15 @@ public final class Decimal extends Number {
         return Objects.hash(numerator, denominator);
     }
 
+    @Override
+    public Decimal clone() {
+        try {
+            return (Decimal) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException();
+        }
+    }
+    
     @Override
     public String toString() {
         return numerator + "/" + denominator;
