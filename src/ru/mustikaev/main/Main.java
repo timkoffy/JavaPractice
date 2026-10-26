@@ -1,6 +1,8 @@
 package ru.mustikaev.main;
 
 import ru.mustikaev.connection.*;
+import ru.mustikaev.edu.InvalidGradeException;
+import ru.mustikaev.edu.Student;
 
 public class Main {
         public static void main(String[] args) {
@@ -41,6 +43,27 @@ public class Main {
                         } catch (NumberFormatException | ArithmeticException e) {}
                 }
                 return first;
+        }
+
+        public static void addRandomGradeToAll(Student... students) {
+                // 4.2.3
+                int[] randomGrades = new int[students.length];
+                for (int i = 0; i < students.length; i++) {
+                        randomGrades[i] = (int) (Math.random() * 10);
+                }
+
+                try {
+                        for (int i = 0; i < students.length; i++) {
+                                Student s1 = new Student(students[i]);
+                                s1.addGrade(randomGrades[i]);
+                        }
+                } catch (InvalidGradeException e) {
+                        return;
+                }
+
+                for (int i = 0; i < students.length; i++) {
+                        students[i].addGrade(randomGrades[i]);
+                }
         }
 
         public static void task424() {
