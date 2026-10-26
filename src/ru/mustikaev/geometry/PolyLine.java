@@ -2,6 +2,7 @@ package ru.mustikaev.geometry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PolyLine implements Lengthable {
     private List<Point> points;
@@ -65,7 +66,7 @@ public class PolyLine implements Lengthable {
     }
 
     public List<Point> toNormalizedPoints() {
-        return points;
+        return new ArrayList<>(points);
     }
 
     public double length() {
@@ -84,6 +85,31 @@ public class PolyLine implements Lengthable {
             resPoints.addAll(obj.getPolyLine().toNormalizedPoints());
         }
         return new PolyLine(resPoints);
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || !(o instanceof PolyLine)) {
+            return false;
+        }
+
+        PolyLine polyLine = (PolyLine) o;
+
+        List<Point> a = this.toNormalizedPoints();
+        List<Point> b = polyLine.toNormalizedPoints();  
+        
+        return a.equals(b) || a.equals(b.reversed());
+    }
+
+    @Override
+    public int hashCode() {
+        List<Point> pts = toNormalizedPoints();
+        int h = 0;
+        for (int i = 0; i < pts.size() - 1; i++) {
+            h += Objects.hashCode(pts.get(i)) + Objects.hashCode(pts.get(i + 1));
+        }
+        return h;
     }
 
     @Override
