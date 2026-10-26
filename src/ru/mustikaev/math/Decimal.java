@@ -1,6 +1,6 @@
 package ru.mustikaev.math;
 
-import java.lang.Math;
+import java.util.Objects;
 
 public final class Decimal extends Number {
     private int numerator;
@@ -113,6 +113,34 @@ public final class Decimal extends Number {
         denominator /= gcd;
     }
 
+    private static int computeGcd(int a, int b) {
+        while (a != 0 && b != 0) {
+            if (a > b) {
+                a %= b;
+            } else {
+                b %= a;
+            }
+        }
+        return a + b;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || !(o.getClass() == this.getClass())) {
+            return false;
+        }
+
+        Decimal decimal = (Decimal) o;
+
+        return numerator == decimal.numerator 
+            && denominator == decimal.denominator;
+    }
+
+    @Override 
+    public int hashCode() {
+        return Objects.hash(numerator, denominator);
+    }
+
     @Override
     public int intValue() {
         return (int) doubleValue();
@@ -131,17 +159,6 @@ public final class Decimal extends Number {
     @Override
     public double doubleValue() {
         return (double) numerator / denominator;
-    }
-
-    static private int computeGcd(int a, int b) {
-        while (a != 0 && b != 0) {
-            if (a > b) {
-                a %= b;
-            } else {
-                b %= a;
-            }
-        }
-        return a + b;
     }
 
     @Override

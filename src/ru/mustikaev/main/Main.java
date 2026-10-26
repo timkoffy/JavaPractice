@@ -6,7 +6,7 @@ import ru.mustikaev.edu.Student;
 
 public class Main {
         public static void main(String[] args) {
-                task424();
+                
         }
 
         public static void task412To421() {

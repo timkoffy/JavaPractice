@@ -1,6 +1,6 @@
 package ru.mustikaev.geometry;
 
-import java.lang.Math;
+import java.util.Objects;
 
 public final class Point3D extends Point {
     private int z;
@@ -32,6 +32,24 @@ public final class Point3D extends Point {
                 Math.pow(p2.getX() - p1.getX(), 2) +
                 Math.pow(p2.getY() - p1.getY(), 2) +
                 Math.pow(p2.getZ() - p1.getZ(), 2));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || !(o.getClass() == this.getClass())) {
+            return false;
+        }
+
+        Point3D point = (Point3D) o;
+
+        return getX() == point.getX() 
+            && getY() == point.getY() 
+            && z == point.z;
+    }
+
+    @Override 
+    public int hashCode() {
+        return Objects.hash(getX(), getY(), z);
     }
 
     @Override
