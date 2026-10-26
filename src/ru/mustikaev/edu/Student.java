@@ -2,6 +2,9 @@ package ru.mustikaev.edu;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import static java.util.Collections.sort;
 
 public class Student {
     private String name;
@@ -50,20 +53,20 @@ public class Student {
 
     public void setGrade(int idx, Integer grade) {
         if (!rule.validate(grade)) {
-            throw new IllegalArgumentException("Оценка не подходит под правило");
+            throw new InvalidGradeException(grade);
         }
         grades.set(idx, grade);
     }
 
     public void addGrade(int grade) {
         if (!rule.validate(grade)) {
-            throw new IllegalArgumentException();
+            throw new InvalidGradeException(grade);
         }
         grades.add(grade);
     }
 
     public static void addGradeAll(List<Student> students, int grade) {
-        List<Student> res = new ArrayList<>(); // через список оценок
+        List<Student> res = new ArrayList<>();
         for (Student student : students) {
             res.add(new Student(student));
         }
@@ -72,7 +75,7 @@ public class Student {
             for (int i = 0; i < res.size(); i++) {
                 res.get(i).addGrade(grade);
             }
-        } catch (IllegalArgumentException e) {
+        } catch (InvalidGradeException e) {
             return;
         }
 
@@ -100,14 +103,33 @@ public class Student {
 
     private void validateGrades(List<Integer> grades) {
         if (grades == null) {
-            throw new IllegalArgumentException("Список оценок null");
+            throw new NullPointerException("Список оценок null");
         }
 
         for (Integer grade : grades) {
             if (!rule.validate(grade)) {
-                throw new IllegalArgumentException("Оценка не подходит под правило");
+                throw new InvalidGradeException(grade);
             }
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || obj.getClass() != getClass()) return false;
+        Student student = (Student) obj;
+        List<Integer> gradesCopy = new ArrayList<>(grades);
+        List<Integer> studGradesCopy = new ArrayList<>(student.grades);
+        sort(gradesCopy);
+        sort(studGradesCopy);
+        return name.equals(student.name) && gradesCopy.equals(studGradesCopy);
+    }
+
+    @Override
+    public int hashCode() {
+        List<Integer> gradesCopy = new ArrayList<>(grades);
+        sort(gradesCopy);
+        return Objects.hash(name, gradesCopy);
     }
 
     @Override
