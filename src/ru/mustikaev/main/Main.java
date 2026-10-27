@@ -4,8 +4,13 @@ import ru.mustikaev.connection.*;
 import ru.mustikaev.edu.InvalidGradeException;
 import ru.mustikaev.edu.Student;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class Main {
         public static void main(String[] args) {
+                fillHeap();
         }
 
         public static void task412To421() {
@@ -77,6 +82,18 @@ public class Main {
                         connector.unregister();
                 } catch (RuntimeException e) {
                         System.out.println("эксепшн в register()");
+                }
+        }
+
+        public static void fillHeap() {
+                List<byte[]> garbage = new ArrayList<>();
+                try {
+                        for (int i = 0; i < 1000; i++) {
+                                System.out.println(i);
+                                garbage.add(new byte[2 * 1024 * 1024]);
+                        }
+                } catch (OutOfMemoryError e) {
+                        System.out.println("out of memory");
                 }
         }
 }
