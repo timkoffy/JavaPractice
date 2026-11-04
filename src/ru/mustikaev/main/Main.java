@@ -6,18 +6,16 @@ import ru.mustikaev.edu.InvalidGradeException;
 import ru.mustikaev.edu.Student;
 import ru.mustikaev.geometry.Line;
 import ru.mustikaev.geometry.Point;
+import ru.mustikaev.geometry.Point3D;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
         public static void main(String[] args) {
-                Box<Integer> box1 = new Box<>(1);
-                Box<Double> box2 = new Box<>(0.2);
-                Box<Double> box3 = new Box<>(-10.0);
-
-                System.out.println(maxBoxValue(box1, box2, box3));
-                System.out.println(box1.getItem());
+                List<Integer> lst = new ArrayList<>();
+                fillList(lst);
+                System.out.println(lst);
         }
 
         public static void task412To421() {
@@ -121,5 +119,15 @@ public class Main {
                 }
 
                 return max;
+        }
+
+        public static void setPoint3DToBox(Box<? super Point3D> box) {
+                box.setItem(new Point3D(1, 2, 3));
+        }
+
+        public static void fillList(List<? super Integer> list) {
+                for (int i = 1; i <= 100; i++) {
+                        list.add(i);
+                }
         }
 }
