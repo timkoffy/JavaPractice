@@ -2,38 +2,29 @@ package ru.mustikaev.geometry;
 
 import java.util.Objects;
 
-public class Line implements Lengthable, Cloneable {
-    private Point begin;
-    private Point end;
+public class Line<P extends Point> implements Lengthable, Cloneable {
+    private P begin;
+    private P end;
 
-    public Line(Point begin, Point end) {
-        this(begin.getX(), begin.getY(), end.getX(), end.getY());
-    }
-
-    public Line(int x1, int y1, int x2, int y2) {
-        this.begin = new Point(x1, y1);
-        this.end = new Point(x2, y2);
+    public Line(P begin, P end) {
+        if (begin == null || end == null) {
+            throw new NullPointerException();
+        }
+        this.begin = begin;
+        this.end = end;
     }
 
     public Line(Line l) {
-        this.begin = new Point(l.begin);
-        this.end = new Point(l.end);
+        this.begin = (P) l.begin.clone();
+        this.end = (P) l.end.clone();
     }
 
-    public void setBegin(Point begin) {
+    public void setBegin(P begin) {
         this.begin.set(begin.getX(), begin.getY());
-    }
-
-    public void setBegin(int x, int y) {
-        this.begin.set(x, y);
     }
 
     public void setEnd(Point end) {
         this.end.set(end.getX(), end.getY());
-    }
-
-    public void setEnd(int x, int y) {
-        this.end.set(x, y);
     }
 
     public Point getBegin() {
@@ -45,9 +36,7 @@ public class Line implements Lengthable, Cloneable {
     }
 
     public double length() {
-        return Math.sqrt(
-                Math.pow(end.getX() - begin.getX(), 2) +
-                Math.pow(end.getY() - begin.getY(), 2));
+        return P.dist(begin, end);
     }
 
     @Override
@@ -73,8 +62,8 @@ public class Line implements Lengthable, Cloneable {
         try {
             Line line = (Line) super.clone();
 
-            line.begin = new Point(this.begin);
-            line.end = new Point(this.end);
+            line.begin = (P) this.begin.clone();
+            line.end = (P) this.end.clone();
 
             return line;
         } catch (CloneNotSupportedException e) {
