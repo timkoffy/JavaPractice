@@ -87,29 +87,30 @@ public class PolyLine implements Lengthable {
         return new PolyLine(resPoints);
     }
 
+    public List<Line> toLines() {
+        return null;
+    }
+
     @Override
     public final boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || !(o instanceof PolyLine)) {
-            return false;
-        }
+        if (o == null) return false;
+        if (!(o instanceof PolyLine p)) return false;
 
-        PolyLine polyLine = (PolyLine) o;
+        List<Line> a = this.toLines();
+        List<Line> b = p.toLines();
 
-        List<Point> a = this.toNormalizedPoints();
-        List<Point> b = polyLine.toNormalizedPoints();  
-        
-        return a.equals(b) || a.equals(b.reversed());
+        if (a.size() != b.size()) return false;
+        return a.containsAll(b);
     }
 
     @Override
     public int hashCode() {
-        List<Point> pts = toNormalizedPoints();
-        int h = 0;
-        for (int i = 0; i < pts.size() - 1; i++) {
-            h += Objects.hashCode(pts.get(i)) + Objects.hashCode(pts.get(i + 1));
+        int hash = 0;
+        for (Line l : toLines()) {
+            hash += l.hashCode();
         }
-        return h;
+        return hash;
     }
 
     @Override

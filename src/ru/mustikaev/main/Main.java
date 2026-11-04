@@ -10,7 +10,13 @@ import java.util.Random;
 
 public class Main {
         public static void main(String[] args) {
-                fillHeap();
+                String str = "aaa";
+                System.out.println(str.getClass());
+                Object o = (Object) str;
+                System.out.println(o.getClass());
+                Integer s = (Integer) o;
+                System.out.println(s.getClass());
+                System.out.println(s);
         }
 
         public static void task412To421() {
