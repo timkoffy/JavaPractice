@@ -23,15 +23,15 @@ public class Line<P extends Point> implements Lengthable, Cloneable {
         this.begin.set(begin.getX(), begin.getY());
     }
 
-    public void setEnd(Point end) {
+    public void setEnd(P end) {
         this.end.set(end.getX(), end.getY());
     }
 
-    public Point getBegin() {
+    public P getBegin() {
         return begin;
     }
 
-    public Point getEnd() {
+    public P getEnd() {
         return end;
     }
 
@@ -62,8 +62,8 @@ public class Line<P extends Point> implements Lengthable, Cloneable {
         try {
             Line line = (Line) super.clone();
 
-            line.begin = (P) this.begin.clone();
-            line.end = (P) this.end.clone();
+            line.begin = this.begin.clone();
+            line.end = this.end.clone();
 
             return line;
         } catch (CloneNotSupportedException e) {

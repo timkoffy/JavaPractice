@@ -3,14 +3,18 @@ package ru.mustikaev.main;
 import ru.mustikaev.connection.*;
 import ru.mustikaev.edu.InvalidGradeException;
 import ru.mustikaev.edu.Student;
+import ru.mustikaev.geometry.Line;
+import ru.mustikaev.geometry.Point;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class Main {
         public static void main(String[] args) {
-
+                Line<Point> l1 = new Line<>(new Point(1, 3), new Point(3, 10));
+                System.out.println(l1);
+                moveBeginXBy10(l1);
+                System.out.println(l1);
         }
 
         public static void task412To421() {
@@ -95,5 +99,10 @@ public class Main {
                 } catch (OutOfMemoryError e) {
                         System.out.println("out of memory");
                 }
+        }
+
+        public static <P extends Point> void moveBeginXBy10(Line<P> line) {
+                P begin = line.getBegin();
+                begin.setX(begin.getX() + 10);
         }
 }
