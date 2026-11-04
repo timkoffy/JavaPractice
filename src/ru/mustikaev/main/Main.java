@@ -1,5 +1,6 @@
 package ru.mustikaev.main;
 
+import ru.mustikaev.Box;
 import ru.mustikaev.connection.*;
 import ru.mustikaev.edu.InvalidGradeException;
 import ru.mustikaev.edu.Student;
@@ -11,10 +12,12 @@ import java.util.List;
 
 public class Main {
         public static void main(String[] args) {
-                Line<Point> l1 = new Line<>(new Point(1, 3), new Point(3, 10));
-                System.out.println(l1);
-                moveBeginXBy10(l1);
-                System.out.println(l1);
+                Box<Integer> box1 = new Box<>(1);
+                Box<Double> box2 = new Box<>(0.2);
+                Box<Double> box3 = new Box<>(-10.0);
+
+                System.out.println(maxBoxValue(box1, box2, box3));
+                System.out.println(box1.getItem());
         }
 
         public static void task412To421() {
@@ -104,5 +107,19 @@ public class Main {
         public static <P extends Point> void moveBeginXBy10(Line<P> line) {
                 P begin = line.getBegin();
                 begin.setX(begin.getX() + 10);
+        }
+
+        public static double maxBoxValue(Box<? extends Number>... boxes) {
+                double max = Double.NEGATIVE_INFINITY;
+
+                for (Box<? extends Number> box : boxes) {
+                        if (box.isEmpty()) continue;
+                        Box<? extends Number> curBox = box.clone();
+
+                        double curValue = curBox.getItem().doubleValue();
+                        if (curValue > max) max = curValue;
+                }
+
+                return max;
         }
 }
