@@ -1,10 +1,12 @@
 package ru.mustikaev.edu;
 
+import ru.mustikaev.Comparable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Student {
+public class Student implements Comparable<Student> {
     private String name;
     private List<Integer> grades;
     private GradeRule rule;
@@ -149,5 +151,17 @@ public class Student {
     @Override
     public String toString() {
         return name + ": " + grades;
+    }
+
+    @Override
+    public int compare(Student o) {
+        Student student = (Student) o;
+
+        double avgGrade1 = getAvgGrade();
+        double avgGrade2 = student.getAvgGrade();
+
+        if (avgGrade1 > avgGrade2) return 1;
+        if (avgGrade1 < avgGrade2) return -1;
+        return 0;
     }
 }
