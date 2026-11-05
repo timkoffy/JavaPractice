@@ -6,7 +6,7 @@ public class Line<P extends Point> implements Lengthable, Cloneable {
     private P begin;
     private P end;
 
-    public Line(P begin, P end) {
+    private Line(P begin, P end) {
         if (begin == null || end == null) {
             throw new NullPointerException();
         }
@@ -14,9 +14,17 @@ public class Line<P extends Point> implements Lengthable, Cloneable {
         this.end = end;
     }
 
-    public Line(Line l) {
+    public Line(Line<P> l) {
         this.begin = (P) l.begin.clone();
         this.end = (P) l.end.clone();
+    }
+
+    public static Line<Point> of(int x1, int y1, int x2, int y2) {
+        return new Line<>(new Point(x1, y1), new Point(x2, y2));
+    }
+
+    public static Line<Point3D> of(int x1, int y1, int z1, int x2, int y2, int z2) {
+        return new Line<>(new Point3D(x1, y1, z1), new Point3D(x2, y2, z2));
     }
 
     public void setBegin(P begin) {
@@ -58,7 +66,7 @@ public class Line<P extends Point> implements Lengthable, Cloneable {
     }
 
     @Override
-    public Line clone() {
+    public Line<P> clone() {
         try {
             Line line = (Line) super.clone();
 
