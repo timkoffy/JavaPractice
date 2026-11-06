@@ -73,7 +73,7 @@ public class PolyLine implements Lengthable {
         double res = 0;
 
         for (int i = 0; i < points.size() - 1; i++) {
-            res += Point.dist(points.get(i), points.get(i + 1));
+            res += points.get(i).dist(points.get(i + 1));
         }
 
         return res;

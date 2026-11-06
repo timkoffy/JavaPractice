@@ -6,12 +6,16 @@ public class Line<P extends Point> implements Lengthable, Cloneable {
     private P begin;
     private P end;
 
-    private Line(P begin, P end) {
+    public Line(P begin, P end) {
         if (begin == null || end == null) {
             throw new NullPointerException();
         }
-        this.begin = begin;
-        this.end = end;
+        if (begin.getClass() != end.getClass()) {
+            begin = (P) new Point(begin.getX(), begin.getY());
+            end = (P) new Point(end.getX(), end.getY());
+        }
+        this.begin = (P) begin.clone();
+        this.end = (P) end.clone();
     }
 
     public Line(Line<P> l) {
@@ -44,7 +48,7 @@ public class Line<P extends Point> implements Lengthable, Cloneable {
     }
 
     public double length() {
-        return P.dist(begin, end);
+        return begin.dist(end);
     }
 
     @Override

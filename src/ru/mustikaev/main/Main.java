@@ -11,11 +11,13 @@ import ru.mustikaev.geometry.Point3D;
 import java.util.ArrayList;
 import java.util.List;
 
+// допилить сетеры и длину для Line
+// тоже самое для ломаной
+
 public class Main {
         public static void main(String[] args) {
-                List<Integer> lst = new ArrayList<>();
-                fillList(lst);
-                System.out.println(lst);
+                Line<Point> l1 = new Line<>(new Point(1, 2), new Point3D(3, 4, 5));
+                System.out.println(l1);
         }
 
         public static void task412To421() {

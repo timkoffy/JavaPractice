@@ -37,10 +37,10 @@ public sealed class Point implements Cloneable permits Point3D {
         return y;
     }
 
-    static public double dist(Point p1, Point p2) {
+    public double dist(Point p) {
         return Math.sqrt(
-                Math.pow(p2.getX() - p1.getX(), 2) +
-                Math.pow(p2.getY() - p1.getY(), 2));
+                Math.pow(p.getX() - getX(), 2) +
+                Math.pow(p.getY() - getY(), 2));
     }
 
     @Override 

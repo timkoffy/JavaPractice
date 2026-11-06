@@ -27,11 +27,11 @@ public final class Point3D extends Point {
         return z;
     }
 
-    static public double dist(Point3D p1, Point3D p2) {
+    public double dist(Point3D p) {
         return Math.sqrt(
-                Math.pow(p2.getX() - p1.getX(), 2) +
-                Math.pow(p2.getY() - p1.getY(), 2) +
-                Math.pow(p2.getZ() - p1.getZ(), 2));
+                Math.pow(p.getX() - getX(), 2) +
+                Math.pow(p.getY() - getY(), 2) +
+                Math.pow(p.getZ() - getZ(), 2));
     }
 
     @Override
