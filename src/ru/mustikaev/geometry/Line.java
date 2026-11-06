@@ -10,8 +10,7 @@ public class Line<P extends Point> implements Lengthable, Cloneable {
         if (begin == null || end == null) {
             throw new NullPointerException();
         }
-        if (begin.getClass() != end.getClass() ||
-                (begin instanceof Point3D && end instanceof Point3D && this.getClass() == Line.class)) {
+        if (begin.getClass() != end.getClass()) {
             begin = (P) new Point(begin.getX(), begin.getY());
             end = (P) new Point(end.getX(), end.getY());
         }
@@ -34,16 +33,20 @@ public class Line<P extends Point> implements Lengthable, Cloneable {
 
     public void setBegin(P begin) {
         if (begin == null) throw new NullPointerException();
-        if (begin.getClass() != this.begin.getClass()) {
-            begin = (P) new Point(begin.getX(), begin.getY());
+        if (begin.getClass() != this.end.getClass()) {
+            this.begin = (P) new Point(begin.getX(), begin.getY());
+            this.end = (P) new Point(this.end.getX(), this.end.getY());
+            return;
         }
         this.begin = (P) begin.clone();
     }
 
     public void setEnd(P end) {
         if (end == null) throw new NullPointerException();
-        if (end.getClass() != this.end.getClass()) {
-            end = (P) new Point(end.getX(), end.getY());
+        if (end.getClass() != this.begin.getClass()) {
+            this.end = (P) new Point(end.getX(), end.getY());
+            this.begin = (P) new Point(this.begin.getX(), this.begin.getY());
+            return;
         }
         this.end = (P) end.clone();
     }
