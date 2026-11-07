@@ -2,128 +2,74 @@ package ru.mustikaev.edu;
 
 import ru.mustikaev.Comparable;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Student implements Comparable<Student> {
+public class Student<T extends IsExcellentable<T> & Averageable<T>> implements Comparable<Student<T>> {
     private String name;
-    private List<Integer> grades;
-    private GradeRule rule;
+    private Grade grades;
 
-    public Student(String name, GradeRule rule, List<Integer> grades) {
+    private Student(String name, Grade grades) {
         this.name = name;
-
-        if (rule == null) rule = GradeRule.INSTANCE;
-        this.rule = rule;
-
-        validateGrades(grades);
-        this.grades = new ArrayList<>(grades);
+        this.grades = grades;
+    }
+    public static Student<IntGrade> of(String name) {
+        return new Student<IntGrade>(name, new IntGrade());
     }
 
-    public Student(String name, GradeRule rule, Integer... grades) {
-        this(name, rule, List.of(grades));
+//    public Student(String name, T... grades) {
+//        this(name, List.of(grades));
+//    }
+//
+//    public Student(Student<T> student) {
+//        this(student.name, student.rule, student.grades);
+//    }
+
+
+    public List<T> getGrades() {
+        return (List<T>) new ArrayList<>();
     }
 
-    public Student(String name, List<Integer> grades) {
-        this(name, null, grades);
+    public void setGrades(Grade<T> grades) {
+        this.grades = grades;
     }
 
-    public Student(String name, Integer... grades) {
-        this(name, List.of(grades));
+//    public void setGrade(int idx, T grade) {
+//        grades.set(grade);
+//    }
+
+    public void addGrade(T grade) {
+        grades.addGrade(grade);
     }
 
-    public Student(String name) {
-        this(name, new ArrayList<>());
-    }
+//    public static void addGradeAll(List<Student> students, T grade) {
+//        List<Student> res = new ArrayList<>();
+//        for (Student student : students) {
+//            res.add(new Student(student));
+//        }
+//
+//        try {
+//            for (int i = 0; i < res.size(); i++) {
+//                res.get(i).addGrade(grade);
+//            }
+//        } catch (InvalidGradeException e) {
+//            return;
+//        }
+//
+//        for (int i = 0; i < students.size(); i++) {
+//            students.get(i).setGrades(res.get(i).getGrades());
+//        }
+//    }
 
-    public Student(Student student) {
-        this(student.name, student.rule, student.grades);
-    }
-
-
-    public List<Integer> getGrades() {
-        return new ArrayList<>(grades);
-    }
-
-    public void setGrades(List<Integer> grades) {
-        validateGrades(grades);
-        this.grades = new ArrayList<>(grades);
-    }
-
-    public void setGrade(int idx, Integer grade) {
-        if (!rule.validate(grade)) {
-            throw new InvalidGradeException(name, grade);
-        }
-        grades.set(idx, grade);
-    }
-
-    public void addGrade(int grade) {
-        if (!rule.validate(grade)) {
-            throw new InvalidGradeException(name, grade);
-        }
-        grades.add(grade);
-    }
-
-    public static void addGradeAll(List<Student> students, int grade) {
-        List<Student> res = new ArrayList<>();
-        for (Student student : students) {
-            res.add(new Student(student));
-        }
-
-        try {
-            for (int i = 0; i < res.size(); i++) {
-                res.get(i).addGrade(grade);
-            }
-        } catch (InvalidGradeException e) {
-            return;
-        }
-
-        for (int i = 0; i < students.size(); i++) {
-            students.get(i).setGrades(res.get(i).getGrades());
-        }
-    }
-
-    public double getAvgGrade() {
-        if (grades == null || grades.isEmpty()) {
-            return 0;
-        }
-
-        int sum = 0;
-        for (Integer grade : grades) {
-            sum += grade;
-        }
-
-        return (double) sum / grades.size();
+    public T getAvgGrade() {
+        return (T) grades.averageGrade();
     }
 
     public boolean isExcellent() {
-        return getAvgGrade() == 5.0;
+        return grades.isExcellent();
     }
-
-    private void validateGrades(List<Integer> grades) {
-        if (grades == null) {
-            throw new NullPointerException("Список оценок null");
-        }
-
-        for (Integer grade : grades) {
-            if (!rule.validate(grade)) {
-                throw new InvalidGradeException(name, grade);
-            }
-        }
-    }
-
-    // @Override
-    // public boolean equals(Object obj) {
-    //     if (this == obj) return true;
-    //     if (obj == null || obj.getClass() != getClass()) return false;
-    //     Student student = (Student) obj;
-    //     List<Integer> gradesCopy = new ArrayList<>(grades);
-    //     List<Integer> studGradesCopy = new ArrayList<>(student.grades);
-    //     sort(gradesCopy);
-    //     sort(studGradesCopy);
-    //     return name.equals(student.name) && gradesCopy.equals(studGradesCopy);
-    // }
 
     @Override
     public boolean equals(Object o) {
@@ -136,13 +82,6 @@ public class Student implements Comparable<Student> {
             && getAvgGrade() == student.getAvgGrade();
     }
 
-    // @Override
-    // public int hashCode() {
-    //     List<Integer> gradesCopy = new ArrayList<>(grades);
-    //     sort(gradesCopy);
-    //     return Objects.hash(name, gradesCopy);
-    // }
-
     @Override
     public int hashCode() {
         return Objects.hash(name, getAvgGrade());
@@ -154,9 +93,7 @@ public class Student implements Comparable<Student> {
     }
 
     @Override
-    public int compare(Student o) {
-        Student student = (Student) o;
-
+    public int compare(Student student) {
         double avgGrade1 = getAvgGrade();
         double avgGrade2 = student.getAvgGrade();
 
