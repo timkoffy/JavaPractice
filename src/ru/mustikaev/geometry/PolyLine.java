@@ -2,7 +2,6 @@ package ru.mustikaev.geometry;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class PolyLine<P extends Point> implements Lengthable {
     private List<P> points;
@@ -20,7 +19,7 @@ public class PolyLine<P extends Point> implements Lengthable {
         Class firstType = points.get(0).getClass();
         for (P point : points) {
             if (point.getClass() != firstType) {
-                castFloor();
+                castCeil();
                 break;
             }
         }
@@ -68,7 +67,7 @@ public class PolyLine<P extends Point> implements Lengthable {
         for (P point : points) {
             if (p.getClass() != point.getClass()) {
                 p = (P) new Point(p.getX(), p.getY());
-                castFloor();
+                castCeil();
                 break;
             }
         }
@@ -96,7 +95,7 @@ public class PolyLine<P extends Point> implements Lengthable {
     public void addPoint(P p) {
         for (P point : points) {
             if (p.getClass() != point.getClass()) {
-                castFloor();
+                castCeil();
             }
         }
         points.add((P) p.clone());
@@ -106,7 +105,7 @@ public class PolyLine<P extends Point> implements Lengthable {
         return new ArrayList<>(points);
     }
 
-    public void castFloor() {
+    public void castCeil() {
         for (int i = 0; i < points.size(); i++) {
             points.set(i, (P) new Point(
                     points.get(i).getX(),
