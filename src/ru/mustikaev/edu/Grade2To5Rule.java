@@ -1,6 +1,6 @@
 package ru.mustikaev.edu;
 
-public class Grade2To5Rule extends GradeRule {
+public class Grade2To5Rule extends GradeRule<Integer> {
     public Grade2To5Rule() {
         super();
     }

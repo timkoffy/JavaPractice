@@ -2,6 +2,8 @@ package ru.mustikaev.main;
 
 import ru.mustikaev.Box;
 import ru.mustikaev.connection.*;
+import ru.mustikaev.edu.Grade;
+import ru.mustikaev.edu.IntGrade;
 import ru.mustikaev.edu.InvalidGradeException;
 import ru.mustikaev.edu.Student;
 import ru.mustikaev.geometry.Line;
@@ -14,20 +16,12 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        List<Point> lst = new ArrayList<>();
-        lst.add(new Point3D(1, 2, 3));
-        lst.add(new Point3D(1, 2, 3));
-        lst.add(new Point3D(1, 2, 3));
-
-        PolyLine<Point> pl1 = new PolyLine<>(lst);
-
-        System.out.println(pl1);
-        pl1.getPoints().forEach(p -> System.out.println(p.getClass()));
-
-        pl1.setPoint(1, new Point(4, 5));
-
-        System.out.println(pl1);
-        pl1.getPoints().forEach(p -> System.out.println(p.getClass()));
+        Grade<IntGrade> g = new IntGrade(5);
+        System.out.println(g.getClass());
+        System.out.println(g.averageGrade().getValue());
+        System.out.println(g.isExcellent());
+        g.addGrade(new IntGrade(1));
+        System.out.println(g.averageGrade().getValue());
 
 
 //                Line<Point> l1 = new Line<>(new Point(1, 3), new Point(3, 5));
@@ -78,26 +72,26 @@ public class Main {
         return first;
     }
 
-    public static void addRandomGradeToAll(Student... students) {
-        // 4.2.3
-        int[] randomGrades = new int[students.length];
-        for (int i = 0; i < students.length; i++) {
-            randomGrades[i] = (int) (Math.random() * 10);
-        }
-
-        try {
-            for (int i = 0; i < students.length; i++) {
-                Student s1 = new Student(students[i]);
-                s1.addGrade(randomGrades[i]);
-            }
-        } catch (InvalidGradeException e) {
-            return;
-        }
-
-        for (int i = 0; i < students.length; i++) {
-            students[i].addGrade(randomGrades[i]);
-        }
-    }
+//    public static void addRandomGradeToAll(Student... students) {
+//        // 4.2.3
+//        int[] randomGrades = new int[students.length];
+//        for (int i = 0; i < students.length; i++) {
+//            randomGrades[i] = (int) (Math.random() * 10);
+//        }
+//
+//        try {
+//            for (int i = 0; i < students.length; i++) {
+//                Student s1 = new Student(students[i]);
+//                s1.addGrade(randomGrades[i]);
+//            }
+//        } catch (InvalidGradeException e) {
+//            return;
+//        }
+//
+//        for (int i = 0; i < students.length; i++) {
+//            students[i].addGrade(randomGrades[i]);
+//        }
+//    }
 
     public static void task424() {
         // 4.2.4

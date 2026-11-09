@@ -1,6 +1,6 @@
 package ru.mustikaev.edu;
 
-public class GradeBinaryRule extends GradeRule {
+public class GradeBinaryRule extends GradeRule<Integer> {
     public GradeBinaryRule() {
         super();
     }

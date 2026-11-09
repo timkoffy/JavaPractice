@@ -1,70 +1,38 @@
 package ru.mustikaev.edu;
 
-import ru.mustikaev.Comparable;
-
-import java.sql.Array;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
-public class Student<T extends IsExcellentable<T> & Averageable<T>> implements Comparable<Student<T>> {
+public class Student<T extends Grade<T>> {
     private String name;
-    private Grade grades;
+    private Grade<T> grades;
 
     private Student(String name, Grade grades) {
         this.name = name;
         this.grades = grades;
     }
-    public static Student<IntGrade> of(String name) {
-        return new Student<IntGrade>(name, new IntGrade());
+
+    public static Student<IntGrade> of(String name, int grade) {
+        return new Student<>(name, new IntGrade(grade));
     }
 
-//    public Student(String name, T... grades) {
-//        this(name, List.of(grades));
-//    }
-//
-//    public Student(Student<T> student) {
-//        this(student.name, student.rule, student.grades);
-//    }
+    public static Student<IntGrade> of(String name, IntGrade... grades) {
+        return new Student<>(name, new ListIntGrade(grades));
+    }
 
-
-    public List<T> getGrades() {
-        return (List<T>) new ArrayList<>();
+    public Grade<T> getGrades() {
+        return grades;
     }
 
     public void setGrades(Grade<T> grades) {
         this.grades = grades;
     }
 
-//    public void setGrade(int idx, T grade) {
-//        grades.set(grade);
-//    }
-
     public void addGrade(T grade) {
         grades.addGrade(grade);
     }
 
-//    public static void addGradeAll(List<Student> students, T grade) {
-//        List<Student> res = new ArrayList<>();
-//        for (Student student : students) {
-//            res.add(new Student(student));
-//        }
-//
-//        try {
-//            for (int i = 0; i < res.size(); i++) {
-//                res.get(i).addGrade(grade);
-//            }
-//        } catch (InvalidGradeException e) {
-//            return;
-//        }
-//
-//        for (int i = 0; i < students.size(); i++) {
-//            students.get(i).setGrades(res.get(i).getGrades());
-//        }
-//    }
-
     public T getAvgGrade() {
-        return (T) grades.averageGrade();
+        return grades.averageGrade();
     }
 
     public boolean isExcellent() {
@@ -92,13 +60,13 @@ public class Student<T extends IsExcellentable<T> & Averageable<T>> implements C
         return name + ": " + grades;
     }
 
-    @Override
-    public int compare(Student student) {
-        double avgGrade1 = getAvgGrade();
-        double avgGrade2 = student.getAvgGrade();
-
-        if (avgGrade1 > avgGrade2) return 1;
-        if (avgGrade1 < avgGrade2) return -1;
-        return 0;
-    }
+//    @Override
+//    public int compare(Student<T> student) {
+//        T avgGrade1 = getAvgGrade();
+//        T avgGrade2 = student.getAvgGrade();
+//
+//        if (avgGrade1 > avgGrade2) return 1;
+//        if (avgGrade1 < avgGrade2) return -1;
+//        return 0;
+//    }
 }

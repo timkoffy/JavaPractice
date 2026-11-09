@@ -1,7 +1,7 @@
 package ru.mustikaev.edu;
 
-public abstract class Grade<T extends IsExcellentable & Averageable<T>> implements IsExcellentable, Averageable<T> {
-    public abstract void addGrade(T grade);
-    public abstract T averageGrade();
-    public abstract boolean isExcellent();
+public interface Grade<T> extends IsExcellentable, Averageable<T> {
+    void addGrade(T grade);
+    T averageGrade();
+    boolean isExcellent();
 }
