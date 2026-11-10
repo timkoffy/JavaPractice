@@ -6,22 +6,24 @@ import ru.mustikaev.edu.Grade;
 import ru.mustikaev.edu.IntGrade;
 import ru.mustikaev.edu.InvalidGradeException;
 import ru.mustikaev.edu.Student;
-import ru.mustikaev.geometry.Line;
-import ru.mustikaev.geometry.Point;
-import ru.mustikaev.geometry.Point3D;
-import ru.mustikaev.geometry.PolyLine;
+import ru.mustikaev.geometry.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Grade<IntGrade> g = new IntGrade(5);
-        System.out.println(g.getClass());
-        System.out.println(g.averageGrade().getValue());
-        System.out.println(g.isExcellent());
-        g.addGrade(new IntGrade(1));
-        System.out.println(g.averageGrade().getValue());
+        ClosedPolyLine pl1 = new ClosedPolyLine(
+                new Point(1, 2),
+                new Point(3, 4),
+                new Point(5, 6)
+        );
+
+        Iterator<Point> iter = pl1.iterator(new Point(3, 4));
+        for (int i = 0; i < 10; i++) {
+            System.out.println(iter.next());
+        }
 
 
 //                Line<Point> l1 = new Line<>(new Point(1, 3), new Point(3, 5));
