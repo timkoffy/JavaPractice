@@ -1,6 +1,7 @@
 package ru.mustikaev.main;
 
 import ru.mustikaev.Box;
+import ru.mustikaev.Flow;
 import ru.mustikaev.connection.*;
 import ru.mustikaev.edu.Grade;
 import ru.mustikaev.edu.IntGrade;
@@ -31,42 +32,19 @@ public class Main {
 //                System.out.println(l1.getEnd().getClass());
     }
 
-    public static <R, E> List<R> map(List<E> list, Function<E, R> fun) {
-        List<R> res = new ArrayList<>(list.size());
-        for (E elem : list) {
-            res.add(fun.apply(elem));
-        }
-        return res;
-    }
 
-    public static <E> List<E> filter(List<E> list, Predicate<E> predicate) {
-        List<E> res = new ArrayList<>();
-        for (E elem : list) {
-            if (predicate.test(elem)) res.add(elem);
-        }
-        return res;
-    }
-
-    public static <E> E reduce(E initValue, List<E> list, BiFunction<E, E, E> fun) {
-        E res = initValue;
-        for (E elem : list) {
-            res = fun.apply(res, elem);
-        }
-        return res;
-    }
 
     // список строк: убрать все
     //  пустые
     //  нач не с цифры
     // оставшиеся в числа и сложить числа
     public static int test(List<String> strings) {
-        List<String> list = filter(strings, (String elem) -> elem != null && !elem.isEmpty());
+        Flow<Integer> flow = new Flow<>(strings)
+                .filter((String elem) -> elem != null && !elem.isEmpty())
+                .filter((String elem) -> Character.isDigit(elem.charAt(0)))
+                .map((String elem) -> Integer.parseInt(elem));
 
-        list = filter(list, (String elem) -> Character.isDigit(elem.charAt(0)));
-
-        List<Integer> digits = map(list, (String elem) -> Integer.parseInt(elem));
-
-        return reduce(0, digits, (Integer a, Integer b) -> a + b);
+        return flow.reduce(0, (Integer a, Integer b) -> a + b);
     }
 
     public static void task412To421() {
