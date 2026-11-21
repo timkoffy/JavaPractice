@@ -1,24 +1,23 @@
 package ru.mustikaev.geometry;
 
 import java.util.*;
-import java.util.function.Consumer;
 
-public class ClosedPolyLine extends PolyLine implements Iterable<Point> {
-    public ClosedPolyLine(List<Point> points) {
+public class ClosedPolyLine<P extends Point> extends PolyLine<P> implements Iterable<P> {
+    public ClosedPolyLine(List<P> points) {
         super(points);
     }
 
-    public ClosedPolyLine(Point... points) {
+    public ClosedPolyLine(P... points) {
         super(points);
     }
 
-    public ClosedPolyLine(PolyLine pl) {
+    public ClosedPolyLine(PolyLine<P> pl) {
         super(pl);
     }
 
     @Override
-    public List<Point> toNormalizedPoints() {
-        List<Point> res = super.toNormalizedPoints();
+    public List<P> toNormalizedPoints() {
+        List<P> res = super.toNormalizedPoints();
         if (res.size() > 2) {
             res.add(res.getFirst());
         }
@@ -26,16 +25,16 @@ public class ClosedPolyLine extends PolyLine implements Iterable<Point> {
     }
 
     @Override
-    public Iterator<Point> iterator() {
+    public Iterator<P> iterator() {
         return new ClosedPolyLineIterator(0);
     }
 
-    public Iterator<Point> iterator(int offset) {
+    public Iterator<P> iterator(int offset) {
         return new ClosedPolyLineIterator(offset % getPoints().size());
     }
 
-    public Iterator<Point> iterator(Point startPoint) {
-        List<Point> points = getPoints(); // можно через indexOf(startPoint)
+    public Iterator<P> iterator(P startPoint) {
+        List<P> points = getPoints(); // можно через indexOf(startPoint)
         for (int i = 0; i < points.size(); i++) {
             if (points.get(i).equals(startPoint)) {
                 return new ClosedPolyLineIterator(i);
@@ -44,8 +43,8 @@ public class ClosedPolyLine extends PolyLine implements Iterable<Point> {
         throw new NoSuchElementException("Точка не найдена");
     }
 
-    private class ClosedPolyLineIterator implements Iterator<Point> {
-        private ListIterator<Point> listItr;
+    private class ClosedPolyLineIterator implements Iterator<P> {
+        private ListIterator<P> listItr;
 
         public ClosedPolyLineIterator(int offset) {
             listItr = getPoints().listIterator(offset);
@@ -57,7 +56,7 @@ public class ClosedPolyLine extends PolyLine implements Iterable<Point> {
         }
 
         @Override
-        public Point next() {
+        public P next() {
             if (!listItr.hasNext())
                 rollback();
             return listItr.next();

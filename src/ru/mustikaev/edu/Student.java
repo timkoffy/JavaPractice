@@ -1,12 +1,14 @@
 package ru.mustikaev.edu;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Student<T extends Grade<T>> {
     private String name;
     private Grade<T> grades;
 
-    private Student(String name, Grade grades) {
+    private Student(String name, Grade<T> grades) {
+        new ArrayList<>();
         this.name = name;
         this.grades = grades;
     }
