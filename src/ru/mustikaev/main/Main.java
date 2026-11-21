@@ -11,20 +11,13 @@ import ru.mustikaev.geometry.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 public class Main {
     public static void main(String[] args) {
-        ClosedPolyLine pl1 = new ClosedPolyLine(
-                new Point(1, 2),
-                new Point(3, 4),
-                new Point(5, 6)
-        );
-
-        Iterator<Point> iter = pl1.iterator(new Point(3, 4));
-        for (int i = 0; i < 10; i++) {
-            System.out.println(iter.next());
-        }
-
+        System.out.println(test(List.of("djkd", "fdjr", "66", "3", "gfdk")));
 
 //                Line<Point> l1 = new Line<>(new Point(1, 3), new Point(3, 5));
 //                System.out.println(l1);
@@ -36,6 +29,44 @@ public class Main {
 //                System.out.println(l1);
 //                System.out.println(l1.getBegin().getClass());
 //                System.out.println(l1.getEnd().getClass());
+    }
+
+    public static <R, E> List<R> map(List<E> list, Function<E, R> fun) {
+        List<R> res = new ArrayList<>(list.size());
+        for (E elem : list) {
+            res.add(fun.apply(elem));
+        }
+        return res;
+    }
+
+    public static <E> List<E> filter(List<E> list, Predicate<E> predicate) {
+        List<E> res = new ArrayList<>();
+        for (E elem : list) {
+            if (predicate.test(elem)) res.add(elem);
+        }
+        return res;
+    }
+
+    public static <E> E reduce(E initValue, List<E> list, BiFunction<E, E, E> fun) {
+        E res = initValue;
+        for (E elem : list) {
+            res = fun.apply(res, elem);
+        }
+        return res;
+    }
+
+    // список строк: убрать все
+    //  пустые
+    //  нач не с цифры
+    // оставшиеся в числа и сложить числа
+    public static int test(List<String> strings) {
+        List<String> list = filter(strings, (String elem) -> elem != null && !elem.isEmpty());
+
+        list = filter(list, (String elem) -> Character.isDigit(elem.charAt(0)));
+
+        List<Integer> digits = map(list, (String elem) -> Integer.parseInt(elem));
+
+        return reduce(0, digits, (Integer a, Integer b) -> a + b);
     }
 
     public static void task412To421() {

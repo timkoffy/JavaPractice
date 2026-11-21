@@ -34,7 +34,7 @@ public class ClosedPolyLine<P extends Point> extends PolyLine<P> implements Iter
     }
 
     public Iterator<P> iterator(P startPoint) {
-        List<P> points = getPoints(); // можно через indexOf(startPoint)
+        List<P> points = getPoints();
         for (int i = 0; i < points.size(); i++) {
             if (points.get(i).equals(startPoint)) {
                 return new ClosedPolyLineIterator(i);
