@@ -8,21 +8,25 @@ import ru.mustikaev.Flow;
 
 public class Main {
     public static void main(String[] args) {
-        Flow<Integer> flow = new Flow<>(List.of(1, 2, 3, 4, 5, 6));
-        System.out.print("перед фильтром:");
-        for (Integer num : flow) {
-            System.out.print(num + " ");
-        }
-        System.out.println();
-
-        flow = flow.filter(x -> true);
-
-        System.out.print("после фильтра:");
-        for (Integer num : flow) {
-            System.out.print(num + " ");
-        }
-        System.out.println();
+        System.out.println(test(List.of("djkd", "fdjr", "66", "3", "gfdk")));
     }
+
+
+
+
+    // список строк: убрать все
+    //  пустые
+    //  нач не с цифры
+    // оставшиеся в числа и сложить числа
+    public static int test(List<String> strings) {
+        Flow<Integer> flow = new Flow<>(strings)
+                .filter((String elem) -> elem != null && !elem.isEmpty())
+                .filter((String elem) -> Character.isDigit(elem.charAt(0)))
+                .map((String elem) -> Integer.parseInt(elem));
+
+        return flow.reduce(0, (Integer a, Integer b) -> a + b);
+    }
+
 
 
 

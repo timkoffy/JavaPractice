@@ -23,7 +23,12 @@ public class Flow<E> implements Iterable<E> {
     }
 
     public <R> Flow<R> map(Function<E, R> fun) {
-        return null;
+        return (Flow<R>) new Flow<>(new Iterable<R>() {
+            @Override 
+            public Iterator<R> iterator() {
+                return new MapIterator<>(Flow.this.iterator(), fun);
+            }
+        });
     }
 
     public E reduce(E initValue, BiFunction<E, E, E> fun) {
@@ -72,6 +77,29 @@ public class Flow<E> implements Iterable<E> {
             }
             buffered = false;
             return nextElem;
+        }
+    }
+
+    private class MapIterator<T, R> implements Iterator<R> {
+        private Iterator<T> source;
+        private Function<T, R> fun;
+
+        public MapIterator(Iterator<T> source, Function<T, R> fun) {
+            this.source = source;
+            this.fun = fun;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return source.hasNext();
+        }
+
+        @Override
+        public R next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            return (R) fun.apply(source.next());
         }
     }
 }
