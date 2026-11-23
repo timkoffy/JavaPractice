@@ -13,9 +13,7 @@ public class Flow<E> implements Iterable<E> {
         this.source = source;
     }
 
-
     public Flow<E> filter(Predicate<E> predicate) {
-        
         return new Flow<>(new Iterable<E>() {
             @Override 
             public Iterator<E> iterator() {
@@ -46,6 +44,7 @@ public class Flow<E> implements Iterable<E> {
         private Iterator<T> source;
         private Predicate<T> predicate;
         private T nextElem;
+        private boolean buffered;
 
         public FilterIterator(Iterator<T> source, Predicate<T> predicate) {
             this.source = source;
@@ -54,10 +53,12 @@ public class Flow<E> implements Iterable<E> {
 
         @Override
         public boolean hasNext() {
+            if (buffered) return true;
             while (source.hasNext()) {
                 T sourceElem = source.next();
                 if (predicate.test(sourceElem)) {
                     nextElem = sourceElem;
+                    buffered = true;
                     return true;
                 }
             }
@@ -69,6 +70,7 @@ public class Flow<E> implements Iterable<E> {
             if (!hasNext()) {
                 throw new NoSuchElementException();
             }
+            buffered = false;
             return nextElem;
         }
     }
